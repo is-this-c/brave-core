@@ -1,0 +1,26 @@
+// Copyright (c) 2024 The Brave Authors. All rights reserved.
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this file,
+// You can obtain one at https://mozilla.org/MPL/2.0/.
+
+module brave_education.mojom;
+
+enum SettingsPageSection {
+  kAppearance,
+  kShieldsFilters
+};
+
+enum SettingsPageTarget {
+  kNone
+};
+
+// Handles product education requests coming from an education-enhanced page.
+// All modifications to this interface require a security review.
+interface EducationRequestHandler {
+
+  // Opens the settings page in a new tab with the specified `section`
+  // displayed. If `target` is a value other than `kNone`, the settings page
+  // will display an appropriate help bubble anchored on the target element.
+  ShowSettingsPage(SettingsPageSection section, SettingsPageTarget target);
+
+};
