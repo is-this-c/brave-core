@@ -12,6 +12,7 @@
 #include "brave/ios/browser/brave_wallet/bitcoin_wallet_service_factory.h"
 #include "brave/ios/browser/brave_wallet/json_rpc_service_factory.h"
 #include "brave/ios/browser/brave_wallet/keyring_service_factory.h"
+#include "brave/ios/browser/brave_wallet/bitcoin_wallet_service_factory.h"
 #include "brave/ios/browser/brave_wallet/tx_service_factory.h"
 #include "brave/ios/browser/brave_wallet/zcash_wallet_service_factory.h"
 #include "components/keyed_service/core/keyed_service.h"

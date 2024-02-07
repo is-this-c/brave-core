@@ -11,6 +11,8 @@ source_set("brave_wallet") {
     "bitcoin_wallet_service_factory.h",
     "brave_wallet_factory_wrappers.h",
     "brave_wallet_factory_wrappers.mm",
+    "bitcoin_wallet_service_factory.h",
+    "bitcoin_wallet_service_factory.mm",
     "brave_wallet_ipfs_service_factory.h",
     "brave_wallet_ipfs_service_factory.mm",
     "brave_wallet_service_factory.h",

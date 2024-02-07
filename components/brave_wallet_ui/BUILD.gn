@@ -4,7 +4,6 @@
 # you can obtain one at http://mozilla.org/MPL/2.0/.
 
 import("//brave/components/common/typescript.gni")
-import("//chrome/common/features.gni")
 import("//mojo/public/tools/bindings/mojom.gni")
 import("//tools/grit/repack.gni")
 
@@ -22,7 +21,7 @@ repack("resources") {
     "$root_gen_dir/brave/components/market_display/resources/market_display_generated.pak",
     "$root_gen_dir/brave/components/nft_display/resources/nft_display_generated.pak",
   ]
-  if (is_android) {
+  if (is_android || is_ios) {
     deps += [
       "//brave/components/brave_wallet_ui/page/screens/android-buy/android:brave_wallet_fund_wallet_page_generated",
       "//brave/components/brave_wallet_ui/page/screens/fund-wallet/android:brave_wallet_deposit_page_generated",
