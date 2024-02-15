@@ -20,6 +20,7 @@ static_library("common") {
     "pref_names.h",
     "pref_registry.cc",
     "pref_registry.h",
+    "remote_worker.h",
     "rewards_flags.cc",
     "rewards_flags.h",
     "rewards_util.cc",

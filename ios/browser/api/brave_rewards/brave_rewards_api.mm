@@ -23,6 +23,7 @@
 #include "base/types/cxx23_to_underlying.h"
 #include "base/values.h"
 #include "brave/build/ios/mojom/cpp_transformations.h"
+#include "brave/components/brave_rewards/common/remote_worker.h"
 #include "brave/components/brave_rewards/common/rewards_flags.h"
 #include "brave/components/brave_rewards/core/global_constants.h"
 #include "brave/components/brave_rewards/core/rewards_database.h"
@@ -109,8 +110,10 @@ static const auto kOneDay =
   std::unique_ptr<RewardsClientIOS,
                   brave_rewards::internal::task_deleter<RewardsClientIOS>>
       _rewardsClient;
-  base::SequenceBound<brave_rewards::internal::RewardsDatabase> rewardsDatabase;
-  scoped_refptr<base::SequencedTaskRunner> databaseQueue;
+  brave_rewards::RemoteWorker<brave_rewards::mojom::RewardsDatabase>
+      rewardsDatabase{base::ThreadPool::CreateSequencedTaskRunner(
+          {base::MayBlock(), base::TaskPriority::USER_VISIBLE,
+           base::TaskShutdownBehavior::BLOCK_SHUTDOWN})};
   scoped_refptr<base::SequencedTaskRunner> _engineTaskRunner;
 }
 
@@ -179,15 +182,10 @@ static const auto kOneDay =
       self.prefs[walletProviderRegionsKey] = @"{}";
     }
 
-    databaseQueue = base::ThreadPool::CreateSequencedTaskRunner(
-        {base::MayBlock(), base::TaskPriority::USER_VISIBLE,
-         base::TaskShutdownBehavior::BLOCK_SHUTDOWN});
-
     const auto* dbPath = [self rewardsDatabasePath].UTF8String;
 
-    rewardsDatabase =
-        base::SequenceBound<brave_rewards::internal::RewardsDatabase>(
-            databaseQueue, base::FilePath(dbPath));
+    rewardsDatabase.BindRemote<brave_rewards::internal::RewardsDatabase>(
+        base::FilePath(dbPath));
 
     _engineTaskRunner->PostTask(
         FROM_HERE, base::BindOnce(^{
@@ -303,9 +301,8 @@ static const auto kOneDay =
   [NSFileManager.defaultManager
       removeItemAtPath:[dbPath stringByAppendingString:@"-journal"]
                  error:nil];
-  rewardsDatabase =
-      base::SequenceBound<brave_rewards::internal::RewardsDatabase>(
-          databaseQueue, base::FilePath(base::SysNSStringToUTF8(dbPath)));
+  rewardsDatabase.BindRemote<brave_rewards::internal::RewardsDatabase>(
+      base::FilePath(base::SysNSStringToUTF8(dbPath)));
 }
 
 - (NSString*)randomStatePath {
@@ -1370,11 +1367,10 @@ static const auto kOneDay =
                 callback:(brave_rewards::mojom::RewardsEngineClient::
                               RunDBTransactionCallback)callback {
   __weak BraveRewardsAPI* weakSelf = self;
-  DCHECK(rewardsDatabase);
-  rewardsDatabase
-      .AsyncCall(&brave_rewards::internal::RewardsDatabase::RunTransaction)
-      .WithArgs(std::move(transaction))
-      .Then(base::BindOnce(
+  DCHECK(rewardsDatabase.remote());
+  rewardsDatabase->RunTransaction(
+      std::move(transaction),
+      base::BindOnce(
           ^(brave_rewards::internal::RunDBTransactionCallback completion,
             brave_rewards::mojom::DBCommandResponsePtr response) {
             if (weakSelf) {

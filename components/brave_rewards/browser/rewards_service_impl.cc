@@ -299,6 +299,7 @@ RewardsServiceImpl::RewardsServiceImpl(
           new DiagnosticLog(profile_->GetPath().Append(kDiagnosticLogPath),
                             kDiagnosticLogMaxFileSize,
                             kDiagnosticLogKeepNumLines)),
+      database_worker_(file_task_runner_),
       notification_service_(new RewardsNotificationServiceImpl(profile)),
       conversion_monitor_(profile->GetPrefs()) {
   // Set up the rewards data source
@@ -435,8 +436,8 @@ void RewardsServiceImpl::StartEngineProcessIfNecessary() {
     return;
   }
 
-  rewards_database_ = base::SequenceBound<internal::RewardsDatabase>(
-      file_task_runner_, publisher_info_db_path_);
+  database_worker_.BindRemote<internal::RewardsDatabase>(
+      publisher_info_db_path_);
 
   BLOG(1, "Starting engine process");
 
@@ -1449,7 +1450,7 @@ void RewardsServiceImpl::Reset() {
   receiver_.reset();
   engine_factory_.reset();
   ready_ = std::make_unique<base::OneShotEvent>();
-  rewards_database_.Reset();
+  database_worker_.reset();
   BLOG(1, "Successfully reset rewards service");
 }
 
@@ -2560,11 +2561,11 @@ void RewardsServiceImpl::ReconcileStampReset() {
 
 void RewardsServiceImpl::RunDBTransaction(mojom::DBTransactionPtr transaction,
                                           RunDBTransactionCallback callback) {
-  DCHECK(rewards_database_);
-  rewards_database_.AsyncCall(&internal::RewardsDatabase::RunTransaction)
-      .WithArgs(std::move(transaction))
-      .Then(base::BindOnce(&RewardsServiceImpl::OnRunDBTransaction, AsWeakPtr(),
-                           std::move(callback)));
+  DCHECK(database_worker_.remote());
+  database_worker_->RunTransaction(
+      std::move(transaction),
+      base::BindOnce(&RewardsServiceImpl::OnRunDBTransaction, AsWeakPtr(),
+                     std::move(callback)));
 }
 
 void RewardsServiceImpl::OnRunDBTransaction(
