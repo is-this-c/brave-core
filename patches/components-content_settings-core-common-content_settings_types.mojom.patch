@@ -1,12 +1,11 @@
 diff --git a/components/content_settings/core/common/content_settings_types.mojom b/components/content_settings/core/common/content_settings_types.mojom
-index 5e704d5151311dad1550ce63487a9a7f4ea823e1..c2765f06bc2d3337f8b2ad687be9510092119734 100644
+index 75bf80532cd61706183791c50aa42b4508f8953d..d8dbe87a06eb7ccc7fbb9290a769acc6ba349656 100644
 --- a/components/content_settings/core/common/content_settings_types.mojom
 +++ b/components/content_settings/core/common/content_settings_types.mojom
-@@ -398,6 +398,21 @@ enum ContentSettingsType {
-   // Whether an application can enumerate audio output device.
-   SPEAKER_SELECTION,
+@@ -401,5 +401,21 @@ enum ContentSettingsType {
+   // Content settings for access to the Direct Sockets API.
+   DIRECT_SOCKETS,
  
--
 +  BRAVE_START,
 +  BRAVE_ADS = BRAVE_START,
 +  BRAVE_COSMETIC_FILTERING,

@@ -1,17 +1,17 @@
 diff --git a/chrome/android/java/src/org/chromium/chrome/browser/sync/settings/ManageSyncSettings.java b/chrome/android/java/src/org/chromium/chrome/browser/sync/settings/ManageSyncSettings.java
-index a551a60ca9b3ba94beb2005d1490e93144060fa0..d1d016c2d1de07f892130ca1baa046dccf6337be 100644
+index 3bce51dee439441b54bfb1e114954b3fda4b313e..bd83b5a20f04ffdfc62837f32e0d2d4c124c5956 100644
 --- a/chrome/android/java/src/org/chromium/chrome/browser/sync/settings/ManageSyncSettings.java
 +++ b/chrome/android/java/src/org/chromium/chrome/browser/sync/settings/ManageSyncSettings.java
-@@ -51,7 +51,7 @@ import org.chromium.chrome.browser.sync.ui.PassphraseDialogFragment;
+@@ -51,7 +51,7 @@ import org.chromium.chrome.browser.sync.ui.PassphraseCreationDialogFragment;
+ import org.chromium.chrome.browser.sync.ui.PassphraseDialogFragment;
  import org.chromium.chrome.browser.sync.ui.PassphraseTypeDialogFragment;
  import org.chromium.chrome.browser.ui.signin.SignOutDialogCoordinator;
- import org.chromium.chrome.browser.ui.signin.SignOutDialogCoordinator.Listener;
 -import org.chromium.components.browser_ui.settings.ChromeBaseCheckBoxPreference;
 +import org.chromium.components.browser_ui.settings.brave_tricks.checkbox_to_switch.ChromeBaseCheckBoxPreference;
  import org.chromium.components.browser_ui.settings.ChromeSwitchPreference;
- import org.chromium.components.browser_ui.settings.SettingsUtils;
- import org.chromium.components.signin.AccountManagerFacadeProvider;
-@@ -369,7 +369,7 @@ public class ManageSyncSettings extends ChromeBaseSettingsFragment
+ import org.chromium.components.browser_ui.settings.FragmentSettingsLauncher;
+ import org.chromium.components.browser_ui.settings.SettingsLauncher;
+@@ -377,7 +377,7 @@ public class ManageSyncSettings extends ChromeBaseSettingsFragment
                                  .getIdentityManager(getProfile())
                                  .getPrimaryAccountInfo(ConsentLevel.SYNC));
          // May happen if account is removed from the device while this screen is shown.

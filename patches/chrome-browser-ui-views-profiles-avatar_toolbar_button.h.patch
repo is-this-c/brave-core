@@ -1,9 +1,9 @@
 diff --git a/chrome/browser/ui/views/profiles/avatar_toolbar_button.h b/chrome/browser/ui/views/profiles/avatar_toolbar_button.h
-index 53a31459e88ae680065c61fdf0401800a888605e..a8c22a8ca132a7ecd72ba37cf2273e0d046b075c 100644
+index 898d9672187ca1aee9f65119b412dba727675ec1..2de46302aa288df14be908431e068452126e4fbe 100644
 --- a/chrome/browser/ui/views/profiles/avatar_toolbar_button.h
 +++ b/chrome/browser/ui/views/profiles/avatar_toolbar_button.h
-@@ -82,6 +82,7 @@ class AvatarToolbarButton : public ToolbarButton {
-   static void SetIPHMinDelayAfterCreationForTesting(base::TimeDelta delay);
+@@ -109,6 +109,7 @@ class AvatarToolbarButton : public ToolbarButton {
+   void NotifyShowEnterpriseTextEndedForTesting() const;
  
   private:
 +  BRAVE_AVATAR_BUTTON_H

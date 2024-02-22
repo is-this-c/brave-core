@@ -1,11 +1,11 @@
 diff --git a/chrome/browser/ui/webui/settings/site_settings_helper.cc b/chrome/browser/ui/webui/settings/site_settings_helper.cc
-index 485d05957276197dcf38517cb37747a4c68a169a..a32b320aa9ff2ccca744cb979268107cd5a18fde 100644
+index 5576d3a9fb3b02084f96202d88ea5b6077d361f5..189f33c5979f8a221a1bcdb5c8a90b22deb08fc5 100644
 --- a/chrome/browser/ui/webui/settings/site_settings_helper.cc
 +++ b/chrome/browser/ui/webui/settings/site_settings_helper.cc
 @@ -215,6 +215,7 @@ const ContentSettingsTypeNameEntry kContentSettingsTypeGroupNames[] = {
-     // TODO(crbug.com/1501130): Add WebUI for Automatic Fullscreen.
-     {ContentSettingsType::AUTOMATIC_FULLSCREEN, nullptr},
+     {ContentSettingsType::TOP_LEVEL_TPCD_TRIAL, nullptr},
      {ContentSettingsType::SUB_APP_INSTALLATION_PROMPTS, nullptr},
+     {ContentSettingsType::DIRECT_SOCKETS, nullptr},
 +    BRAVE_CONTENT_SETTINGS_TYPE_GROUP_NAMES_LIST
  };
  
