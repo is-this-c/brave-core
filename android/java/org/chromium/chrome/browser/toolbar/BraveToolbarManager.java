@@ -44,6 +44,7 @@ import org.chromium.chrome.browser.merchant_viewer.MerchantTrustSignalsCoordinat
 import org.chromium.chrome.browser.omnibox.LocationBar;
 import org.chromium.chrome.browser.omnibox.suggestions.history_clusters.HistoryClustersProcessor.OpenHistoryClustersDelegate;
 import org.chromium.chrome.browser.profiles.Profile;
+import org.chromium.chrome.browser.readaloud.ReadAloudController;
 import org.chromium.chrome.browser.share.ShareDelegate;
 import org.chromium.chrome.browser.tab.Tab;
 import org.chromium.chrome.browser.tab.TabObscuringHandler;
@@ -173,7 +174,8 @@ public class BraveToolbarManager extends ToolbarManager {
             boolean initializeWithIncognitoColors,
             @Nullable BackPressManager backPressManager,
             @NonNull OpenHistoryClustersDelegate openHistoryClustersDelegate,
-            @Nullable BooleanSupplier overviewIncognitoSupplier) {
+            @Nullable BooleanSupplier overviewIncognitoSupplier,
+            ObservableSupplier<ReadAloudController> readAloudControllerSupplier) {
         super(
                 activity,
                 controlsSizer,
@@ -219,7 +221,8 @@ public class BraveToolbarManager extends ToolbarManager {
                 initializeWithIncognitoColors,
                 backPressManager,
                 openHistoryClustersDelegate,
-                overviewIncognitoSupplier);
+                overviewIncognitoSupplier,
+                readAloudControllerSupplier);
 
         mOmniboxFocusStateSupplier = omniboxFocusStateSupplier;
         mLayoutStateProviderSupplier = layoutStateProviderSupplier;

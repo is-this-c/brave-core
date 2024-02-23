@@ -819,7 +819,8 @@ public class BytecodeTest {
                         boolean.class,
                         BackPressManager.class,
                         OpenHistoryClustersDelegate.class,
-                        BooleanSupplier.class));
+                        BooleanSupplier.class,
+                        ObservableSupplier.class));
         Assert.assertTrue(constructorsMatch(
                 "org/chromium/chrome/browser/toolbar/bottom/BottomControlsMediator",
                 "org/chromium/chrome/browser/toolbar/bottom/BraveBottomControlsMediator",
