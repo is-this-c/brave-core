@@ -139,27 +139,6 @@ void BraveContentSettingsAgentImpl::BraveSpecificDidBlockJavaScript(
   GetOrCreateBraveShieldsRemote()->OnJavaScriptBlocked(details);
 }
 
-bool BraveContentSettingsAgentImpl::AllowScript(bool enabled_per_settings) {
-  // clear cached url for other flow like directly calling `DidNotAllowScript`
-  // without calling `AllowScriptFromSource` first
-  blocked_script_url_ = GURL::EmptyGURL();
-
-  blink::WebLocalFrame* frame = render_frame()->GetWebFrame();
-  const GURL secondary_url(url::Origin(frame->GetSecurityOrigin()).GetURL());
-  bool allow = ContentSettingsAgentImpl::AllowScript(enabled_per_settings);
-  auto is_shields_down = IsBraveShieldsDown(frame, secondary_url);
-  auto is_script_temprily_allowed = IsScriptTemporilyAllowed(secondary_url);
-  allow = allow || is_shields_down || is_script_temprily_allowed;
-  if (!allow) {
-    blocked_script_url_ = secondary_url;
-  } else if (!is_shields_down) {
-    if (is_script_temprily_allowed) {
-      BraveSpecificDidAllowJavaScriptOnce(secondary_url);
-    }
-  }
-  return allow;
-}
-
 void BraveContentSettingsAgentImpl::DidNotAllowScript() {
   if (blocked_script_url_.is_empty()) {
     blink::WebLocalFrame* frame = render_frame()->GetWebFrame();
@@ -225,43 +204,6 @@ bool BraveContentSettingsAgentImpl::AllowStorageAccessSync(
   }
 
   return false;
-}
-
-bool BraveContentSettingsAgentImpl::AllowScriptFromSource(
-    bool enabled_per_settings,
-    const blink::WebURL& script_url) {
-  GURL secondary_url(script_url);
-  // For scripts w/o sources it should report the domain / site used for
-  // executing the frame (which most, but not all, of the time will just be from
-  // document.location
-  if (secondary_url.SchemeIsLocal()) {
-    secondary_url =
-        url::Origin(render_frame()->GetWebFrame()->GetSecurityOrigin())
-            .GetURL();
-  }
-  bool allow = ContentSettingsAgentImpl::AllowScriptFromSource(
-      enabled_per_settings, script_url);
-
-  // scripts with whitelisted protocols, such as chrome://extensions should
-  // be allowed
-  bool should_white_list = IsAllowlistedForContentSettings(
-      blink::WebSecurityOrigin::Create(script_url),
-      render_frame()->GetWebFrame()->GetDocument().Url());
-  auto is_shields_down =
-      IsBraveShieldsDown(render_frame()->GetWebFrame(), secondary_url);
-  auto is_script_temprily_allowed = IsScriptTemporilyAllowed(secondary_url);
-  allow = allow || should_white_list || is_shields_down ||
-          is_script_temprily_allowed;
-
-  if (!allow) {
-    blocked_script_url_ = secondary_url;
-  } else if (!is_shields_down) {
-    if (is_script_temprily_allowed) {
-      BraveSpecificDidAllowJavaScriptOnce(secondary_url);
-    }
-  }
-
-  return allow;
 }
 
 bool BraveContentSettingsAgentImpl::IsBraveShieldsDown(

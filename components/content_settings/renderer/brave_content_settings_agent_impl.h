@@ -53,9 +53,6 @@ class BraveContentSettingsAgentImpl
   void DidCommitProvisionalLoad(ui::PageTransition transition) override;
 
  protected:
-  bool AllowScript(bool enabled_per_settings) override;
-  bool AllowScriptFromSource(bool enabled_per_settings,
-                             const blink::WebURL& script_url) override;
   void DidNotAllowScript() override;
 
   blink::WebSecurityOrigin GetEphemeralStorageOriginSync() override;
