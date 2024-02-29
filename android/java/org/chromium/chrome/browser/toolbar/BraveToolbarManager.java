@@ -42,7 +42,6 @@ import org.chromium.chrome.browser.layouts.LayoutStateProvider;
 import org.chromium.chrome.browser.lifecycle.ActivityLifecycleDispatcher;
 import org.chromium.chrome.browser.merchant_viewer.MerchantTrustSignalsCoordinator;
 import org.chromium.chrome.browser.omnibox.LocationBar;
-import org.chromium.chrome.browser.omnibox.suggestions.history_clusters.HistoryClustersProcessor.OpenHistoryClustersDelegate;
 import org.chromium.chrome.browser.profiles.Profile;
 import org.chromium.chrome.browser.readaloud.ReadAloudController;
 import org.chromium.chrome.browser.share.ShareDelegate;
@@ -173,7 +172,6 @@ public class BraveToolbarManager extends ToolbarManager {
             Supplier<EphemeralTabCoordinator> ephemeralTabCoordinatorSupplier,
             boolean initializeWithIncognitoColors,
             @Nullable BackPressManager backPressManager,
-            @NonNull OpenHistoryClustersDelegate openHistoryClustersDelegate,
             @Nullable BooleanSupplier overviewIncognitoSupplier,
             ObservableSupplier<ReadAloudController> readAloudControllerSupplier) {
         super(
@@ -220,7 +218,6 @@ public class BraveToolbarManager extends ToolbarManager {
                 ephemeralTabCoordinatorSupplier,
                 initializeWithIncognitoColors,
                 backPressManager,
-                openHistoryClustersDelegate,
                 overviewIncognitoSupplier,
                 readAloudControllerSupplier);
 
