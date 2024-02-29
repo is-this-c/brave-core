@@ -1,8 +1,8 @@
 diff --git a/tools/typescript/ts_library.py b/tools/typescript/ts_library.py
-index cb7b9a22e691aaffe19a810c5aed296bd1039d82..9e680720c97689c23862c7758f0e290c402b2946 100644
+index 0d8ab6f6489e8cf75ba38d45183e05583adef19e..d5ec261ef24e22c7251ea5d3fbadfa19729b2180 100644
 --- a/tools/typescript/ts_library.py
 +++ b/tools/typescript/ts_library.py
-@@ -280,5 +280,6 @@ def main(argv):
+@@ -297,5 +297,6 @@ def main(argv):
        json.dump(manifest_data, manifest_file)
  
  
