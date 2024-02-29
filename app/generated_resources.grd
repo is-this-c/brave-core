@@ -644,10 +644,22 @@ are declared in tools/grit/grit_rule.gni.
             <message name="IDS_CONTENT_CONTEXT_OPENLINKPREVIEW_TRIGGER_ALTCLICK" desc="The minor text of the Preview link command in the content area context menu, alt+click trigger">
               ⌥+Click
             </message>
+            <message name="IDS_CONTENT_CONTEXT_OPENLINKPREVIEW_TRIGGER_ALTHOVER" desc="The minor text of the Preview link command in the content area context menu, alt+hover trigger">
+              ⌥+Hover
+            </message>
+            <message name="IDS_CONTENT_CONTEXT_OPENLINKPREVIEW_TRIGGER_LONGPRESS" desc="The minor text of the Preview link command in the content area context menu, long press trigger">
+              Long press
+            </message>
           </if>
           <if expr="not is_macosx">
             <message name="IDS_CONTENT_CONTEXT_OPENLINKPREVIEW_TRIGGER_ALTCLICK" desc="The minor text of the Preview link command in the content area context menu, alt+click trigger">
               Alt+Click
+            </message>
+            <message name="IDS_CONTENT_CONTEXT_OPENLINKPREVIEW_TRIGGER_ALTHOVER" desc="The minor text of the Preview link command in the content area context menu, alt+hover trigger">
+              Alt+Hover
+            </message>
+            <message name="IDS_CONTENT_CONTEXT_OPENLINKPREVIEW_TRIGGER_LONGPRESS" desc="The minor text of the Preview link command in the content area context menu, long press trigger">
+              Long press
             </message>
           </if>
 
@@ -932,10 +944,22 @@ are declared in tools/grit/grit_rule.gni.
             <message name="IDS_CONTENT_CONTEXT_OPENLINKPREVIEW_TRIGGER_ALTCLICK" desc="In Title Case: The minor text of the Preview link command in the content area context menu, alt+click trigger">
               ⌥+Click
             </message>
+            <message name="IDS_CONTENT_CONTEXT_OPENLINKPREVIEW_TRIGGER_ALTHOVER" desc="In Title Case: The minor text of the Preview link command in the content area context menu, alt+hover trigger">
+              ⌥+Hover
+            </message>
+            <message name="IDS_CONTENT_CONTEXT_OPENLINKPREVIEW_TRIGGER_LONGPRESS" desc="In Title Case: The minor text of the Preview link command in the content area context menu, long press trigger">
+              Long Press
+            </message>
           </if>
           <if expr="not is_macosx">
             <message name="IDS_CONTENT_CONTEXT_OPENLINKPREVIEW_TRIGGER_ALTCLICK" desc="In Title Case: The minor text of the Preview link command in the content area context menu, alt+click trigger">
               Alt+Click
+            </message>
+            <message name="IDS_CONTENT_CONTEXT_OPENLINKPREVIEW_TRIGGER_ALTHOVER" desc="In Title Case: The minor text of the Preview link command in the content area context menu, alt+hover trigger">
+              Alt+Hover
+            </message>
+            <message name="IDS_CONTENT_CONTEXT_OPENLINKPREVIEW_TRIGGER_LONGPRESS" desc="In Title Case: The minor text of the Preview link command in the content area context menu, long press trigger">
+              Long Press
             </message>
           </if>
 
@@ -1260,6 +1284,15 @@ are declared in tools/grit/grit_rule.gni.
           <message name="IDS_SAVE_AND_SHARE_MENU" desc="The text label of the Save and share sub menu item">
             &amp;Save and share
           </message>
+          <message name="IDS_SAVE_SHARE_AND_CAST_MENU" desc="The text label of the Save, share, and cast sub menu item">
+            Save, share, and cast
+          </message>
+          <message name="IDS_CAST_SAVE_AND_SHARE_MENU" desc="The text label of the Cast, save, and share sub menu item">
+            Cast, save, and share
+          </message>
+          <message name="IDS_SAVE_AND_SHARE_MENU_CAST" desc="The text label of the Cast section of the Save and share sub menu">
+            Cast
+          </message>
           <message name="IDS_SAVE_AND_SHARE_MENU_SAVE" desc="The text label of the Save section of the Save and share sub menu">
             Save
           </message>
@@ -1399,6 +1432,15 @@ are declared in tools/grit/grit_rule.gni.
           </message>
           <message name="IDS_SAVE_AND_SHARE_MENU" desc="In Title Case: The text label of the Save and share sub menu item">
             &amp;Save and Share
+          </message>
+          <message name="IDS_SAVE_SHARE_AND_CAST_MENU" desc="In Title Case: The text label of the Save, share, and cast sub menu item">
+            Save, Share, and Cast
+          </message>
+          <message name="IDS_CAST_SAVE_AND_SHARE_MENU" desc="In Title Case: The text label of the Cast, save, and share sub menu item">
+            Cast, Save, and Share
+          </message>
+          <message name="IDS_SAVE_AND_SHARE_MENU_CAST" desc="In Title Case: The text label of the Cast section of the Save and share sub menu">
+            Cast
           </message>
           <message name="IDS_SAVE_AND_SHARE_MENU_SAVE" desc="In Title Case: The text label of the Save section of the Save and share sub menu">
             Save
@@ -3122,6 +3164,9 @@ are declared in tools/grit/grit_rule.gni.
       <message name="IDS_INSTALL_PWA_BUTTON_LABEL" desc="Text for button that installs a web app to the operating system.">
         Install
       </message>
+      <message name="IDS_INSTALL_PWA_DIALOG_TITLE" desc="Title for dialog that shows up when a web app needs to be installed to the operating system.">
+        Install app
+      </message>
 
       <message name="IDS_BOOKMARK_APP_AX_BUBBLE_NAME_LABEL" desc="Text preceding the name of a bookmark app, read by spoken feedback.">
         Shortcut name
@@ -4240,6 +4285,11 @@ are declared in tools/grit/grit_rule.gni.
           <ph name="CERTIFICATE_NAME">$1<ex>Example Certificate</ex></ph> (extension provided)
         </message>
       </if>
+
+      <!-- DevTools shared process infobar -->
+      <message name="IDS_DEV_TOOLS_SHARED_PROCESS_INFOBAR" desc="Label displayed in an infobar when the tab being debugged is run in a process that hosts multiple tabs. The label does not disappear until the user dismisses it or closes the debugger.">
+        Other tabs share a process with this tab, which may result in an unexpected DevTools experience.
+      </message>
 
       <!-- DevTools attached infobar -->
       <message name="IDS_DEV_TOOLS_INFOBAR_LABEL" desc="Label displayed in an infobar when external debugger is attached to the browser.  The label does not disappear until the user dismisses it, even if the debugger is detached, and so should not imply that the debugger must still be debugging the browser, only that it was, and could still be.">
@@ -8107,6 +8157,9 @@ Keep your key file in a safe place. You will need it to create new versions of y
       <message name="IDS_NTP_MODULES_TAB_RESUMPTION_SENTENCE" desc="Name of the tabs in the Tab Resumption module in sentence case shown in various UIs.">
         Tabs
       </message>
+      <message name="IDS_NTP_MODULES_TAB_RESUMPTION_RECENTLY_OPENED" desc="Default string text for when a tab was opened less than 60 seconds ago.">
+        Recently opened
+      </message>
 
       <!-- Extensions NTP Middle Slot Promo -->
       <message name="IDS_EXTENSIONS_PROMO_PERFORMANCE">
@@ -8732,10 +8785,19 @@ Keep your key file in a safe place. You will need it to create new versions of y
         Hidden toolbar buttons
       </message>
       <message name="IDS_TOOLTIP_EXTENSIONS_BUTTON_ALL_EXTENSIONS_BLOCKED" desc="The tooltip for the extensions button when all the extensions are blocked on the current site.">
-        Extensions are blocked on this site
+        Extensions not allowed on this site
       </message>
       <message name="IDS_TOOLTIP_EXTENSIONS_BUTTON_ANY_EXTENSION_HAS_ACCESS" desc="The tooltip for the extensions button when any extension has access to the current site.">
-        Extensions are allowed on this site
+        Extensions allowed on this site
+      </message>
+      <message name="IDS_ACC_NAME_EXTENSIONS_BUTTON" desc="The accessible text for the extensions button.">
+        Extensions menu
+      </message>
+      <message name="IDS_ACC_NAME_EXTENSIONS_BUTTON_ALL_EXTENSIONS_BLOCKED" desc="The accessible text for the extensions button when all the extensions are blocked on the current site.">
+        Extensions not allowed on this site. Select to open menu
+      </message>
+      <message name="IDS_ACC_NAME_EXTENSIONS_BUTTON_ANY_EXTENSION_HAS_ACCESS" desc="The accessible text for the extensions button when all the extensions are blocked on the current site.">
+        Extensions allowed on this site. Select to open menu
       </message>
       <message name="IDS_TOOLTIP_EXTENSIONS_SITE_ACCESS_BUTTON" desc="The tooltip for the extensions site access button">
         Extension permissions
@@ -10453,6 +10515,9 @@ Check your passwords anytime in <ph name="GOOGLE_PASSWORD_MANAGER">$1<ex>Brave P
       </message>
       <message name="IDS_TAB_ORGANIZATION_CREATE_GROUP" desc="The label for the button that creates a tab group in the tab organization UI">
         Create group
+      </message>
+      <message name="IDS_TAB_ORGANIZATION_CREATE_GROUPS" desc="The label for the button that creates multiple tab groups in the tab organization UI">
+        Create groups
       </message>
       <message name="IDS_TAB_ORGANIZATION_DISMISS" desc="The label for the button that dismisses the tab organization UI">
         Dismiss
@@ -15474,11 +15539,32 @@ Please help our engineers fix this problem. Tell us what happened right before y
     <message name="IDS_DATA_CONTROLS_CLIPBOARD_PASTE_BLOCK_TITLE" desc="Text displayed at the top of a dialog telling the user their clipboard paste (ctrl-v) has been blocked by their admin.">
       Pasting this content to this site is not allowed
     </message>
+    <message name="IDS_DATA_CONTROLS_CLIPBOARD_PASTE_WARN_TITLE" desc="Text displayed at the top of a dialog telling the user their clipboard paste (ctrl-v) is not recommended by their admin.">
+      Pasting this content to this site is not recommended
+    </message>
     <message name="IDS_DATA_CONTROLS_CLIPBOARD_COPY_BLOCK_TITLE" desc="Text displayed at the top of a dialog telling the user their clipboard copy (ctrl-c) has been blocked by their admin.">
       Copying from this site is not allowed
     </message>
+    <message name="IDS_DATA_CONTROLS_CLIPBOARD_COPY_WARN_TITLE" desc="Text displayed at the top of a dialog telling the user their clipboard copy (ctrl-c) is not recommended by their admin.">
+      Copying from this site is not recommended
+    </message>
     <message name="IDS_DATA_CONTROLS_BLOCKED_LABEL" desc="Generic text displayed in a dialog telling the user their action has been blocked by their administrator.">
       Your administrator has blocked this action
+    </message>
+    <message name="IDS_DATA_CONTROLS_WARNED_LABEL" desc="Generic text displayed in a dialog telling the user their action is not recommended by their administrator.">
+      This action might violate your organization's policies
+    </message>
+    <message name="IDS_DATA_CONTROLS_PASTE_WARN_CONTINUE_BUTTON" desc="Continue dialog button label for warning before pasting to a site.">
+      Paste anyway
+    </message>
+    <message name="IDS_DATA_CONTROLS_COPY_WARN_CONTINUE_BUTTON" desc="Continue dialog button label for warning before copying from a site.">
+      Copy anyway
+    </message>
+    <message name="IDS_DATA_CONTROLS_PASTE_WARN_CANCEL_BUTTON" desc="Cancel dialog button label for warning before pasting to a site.">
+      Don't paste
+    </message>
+    <message name="IDS_DATA_CONTROLS_COPY_WARN_CANCEL_BUTTON" desc="Cancel dialog button label for warning before copying from a site.">
+      Don't copy
     </message>
 
 
@@ -15851,8 +15937,8 @@ Please help our engineers fix this problem. Tell us what happened right before y
     <message name="IDS_ACCOUNT_SELECTION_CHOOSE_AN_ACCOUNT" desc="Text to prompt a user to choose an account to sign in to an identity provider with." translateable="false">
       Choose an account to continue
     </message>
-    <message name="IDS_ACCOUNT_SELECTION_CANCEL" desc="Text for button to cancel signing in with an account from an identity provider." translateable="false">
-      Cancel
+    <message name="IDS_ACCOUNT_SELECTION_CONFIRM_ACCOUNT" desc="Text to prompt a user to confirm using an account to sign in to an identity provider with." translateable="false">
+      Confirm you want to sign in to <ph name="SITE_ETLD_PLUS_ONE">$1<ex>rp.example</ex></ph> with <ph name="IDENTITY_PROVIDER_ETLD_PLUS_ONE">$2<ex>idp.example</ex></ph>
     </message>
     <message name="IDS_ACCOUNT_SELECTION_DATA_SHARING_CONSENT_NO_PP_OR_TOS" desc="The consent text shown to the user before sign up when there is no privacy policy or terms of service.">
       To continue, <ph name="IDENTITY_PROVIDER_ETLD_PLUS_ONE">$1<ex>idp.com</ex></ph> will share your name, email address, and profile picture with this site.
@@ -15869,7 +15955,7 @@ Please help our engineers fix this problem. Tell us what happened right before y
     <message name="IDS_ACCOUNT_SELECTION_USE_OTHER_ACCOUNT" desc="Title of the button that lets the user log in to a different account" translateable="false">
       Use a different account
     </message>
-    <message name="IDS_IDP_SIGNIN_STATUS_MISMATCH_DIALOG_CONTINUE" desc="Title of the button that allows the user to continue with signing in to an account from an identity provider.">
+    <message name="IDS_SIGNIN_CONTINUE" desc="Title of the button that allows the user to continue with signing in to an account from an identity provider.">
       Continue
     </message>
     <message name="IDS_IDP_SIGNIN_STATUS_MISMATCH_DIALOG_BODY" desc="Body for mismatch dialog which is shown to prompt the user to sign in to a website using an account from an identity provider.">

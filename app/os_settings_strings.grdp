@@ -4481,7 +4481,7 @@ Press an assigned switch or key to remove assignment.
     Network out of range
     </message>
     <message name="IDS_SETTINGS_INTERNET_MOBILE_PROVIDER_LOCKED" desc="Text shown when viewing network detail page when the mobile provider is locked due to carrier lock">
-    Mobile network provider is locked
+    Cannot connect. Locked by another mobile provider.
   </message>
   <message name="IDS_SETTINGS_INTERNET_CELLULAR_SETUP_DIALOG_TITLE" desc="The title text of the cellular setup dialog that allows users set up a new cellular network by activating a physical SIM card or setting up the device's built in eSIM.">
     Set up new network
@@ -5589,6 +5589,9 @@ Press an assigned switch or key to remove assignment.
   <message name="IDS_SETTINGS_DISPLAY_NIGHT_LIGHT_TEMP_SLIDER_MIN_LABEL" desc="In Device Settings &gt; Displays, label of the minimum value settable by the color temperature slider.">
     Cooler
   </message>
+  <message name="IDS_SETTINGS_DISPLAY_SHINY_PERFORMANCE_LABEL" desc="In Device Settings &gt; Displays, label of the toggle of enabling Shiny Performance." translateable="false">
+    Shiny Performance
+  </message>
   <message name="IDS_SETTINGS_DISPLAY_UNIFIED_DESKTOP" desc="In Device Settings &gt; Displays, the label for the control for the unified desktop feature.">
     Allow windows to span displays
   </message>
@@ -6331,7 +6334,7 @@ Press &amp; hold keyboard keys to see accent marks and special characters. This 
     Data access protection for peripherals
   </message>
   <message name="IDS_OS_SETTINGS_REVAMP_DATA_ACCESS_PROTECTION_TOGGLE_TITLE" desc="The title of the toggle to enable/disable peripheral data access protection. Peripheral data access protection refers to the system (ChromeOS) preventing external peripherals (e.g. Thunderbolt docks) from accessing the device's memory.">
-    Block external accessories from accessing and sharing memory (RAM)
+    Block Thunderbolt or USB4 accessories from accessing and sharing memory (RAM)
   </message>
   <message name="IDS_OS_SETTINGS_DATA_ACCESS_PROTECTION_TOGGLE_DESCRIPTION" desc="The description of the toggle to enable/disable peripheral data access protection. Peripheral data access protection refers to the system (ChromeOS) preventing external peripherals (e.g. Thunderbolt docks) from accessing the device's memory.">
     Some devices require you to disable data access protection to work properly or at full performance.
@@ -6470,6 +6473,17 @@ Press &amp; hold keyboard keys to see accent marks and special characters. This 
   </message>
     <message name="IDS_OS_SETTINGS_PRIVACY_HUB_GEOLOCATION_ACCESS_LEVEL_DISALLOWED" translateable="false" desc="In Geolocation setting subpage (under Privacy Controls), Dropdown list item to set system-wide geolocation access level. Blocks geolocation access to every geolocation client (including system services).">
     Blocked for all
+  </message>
+  <message name="IDS_OS_SETTINGS_PRIVACY_HUB_GEOLOCATION_ACCURACY_TOGGLE_TEXT" translateable="false" desc="In Geolocation setting advance subpage (under Privacy Controls), text description for the toggle settings that controls location accuracy toggle.">
+    <!-- TODO(vsomani): Figure out how we can add break in the below line. -->
+    <!-- TODO(b/325534825): Fix the comment and update translateable once done. -->
+    Brave's location service improves location accuracy by using Wi-Fi, mobile networks, and sensors to help estimate your location. Brave may collect location data periodically and use this data in an anonymous way to improve location accuracy and location-based services. Turning this off will result in your device only using GPS for location. This may impact the accuracy of location used by apps such as Maps and Find My Device.
+  </message>
+  <message name="IDS_OS_SETTINGS_PRIVACY_HUB_GEOLOCATION_ACCURACY_TOGGLE_TITLE" desc="In Geolocation setting advance subpage (under Privacy Controls), title displayed for the toggle to control location accuracy toggle.">
+    Improve location accuracy
+  </message>
+  <message name="IDS_OS_SETTINGS_PRIVACY_HUB_GEOLOCATION_ADVANCED_AREA_TITLE" desc="The title of the advanced location settings page.">
+    Advanced location settings
   </message>
   <message name="IDS_OS_SETTINGS_HW_DATA_USAGE_TOGGLE_TITLE" desc="The label of the checkbox to enable/disable device hardware data collection and usage in ChromeOS Flex.">
     <ph name="DEVICE_OS">$1<ex>ChromeOS Flex</ex></ph> hardware support and stability
