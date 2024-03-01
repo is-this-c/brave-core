@@ -31,6 +31,7 @@
 #include "content/public/browser/navigation_entry.h"
 #include "content/public/browser/scoped_accessibility_mode.h"
 #include "content/public/browser/storage_partition.h"
+#include "include/core/SkBitmap.h"
 #include "pdf/buildflags.h"
 #include "ui/accessibility/ax_mode.h"
 #include "ui/base/l10n/l10n_util.h"
@@ -94,12 +95,19 @@ void AIChatTabHelper::OnPDFA11yInfoLoaded() {
   DVLOG(3) << "PDF Loaded";
   is_pdf_a11y_info_loaded_ = true;
   if (pending_get_page_content_callback_) {
-    FetchPageContent(web_contents(), "",
+    FetchPageContent(web_contents(), "", SkBitmap(),
                      std::move(pending_get_page_content_callback_));
   }
   pdf_load_observer_.reset();
   if (on_pdf_a11y_info_loaded_cb_) {
     std::move(on_pdf_a11y_info_loaded_cb_).Run();
+  }
+}
+
+void AIChatTabHelper::OnPreviewReady(const SkBitmap& bitmap) {
+  if (pending_get_page_content_callback_) {
+    FetchPageContent(web_contents(), "", bitmap,
+                     std::move(pending_get_page_content_callback_));
   }
 }
 
@@ -206,7 +214,9 @@ void AIChatTabHelper::GetPageContent(GetPageContentCallback callback,
     // invalidation_token doesn't matter for PDF extraction.
     pending_get_page_content_callback_ = std::move(callback);
   } else {
-    FetchPageContent(web_contents(), invalidation_token, std::move(callback));
+    // FetchPageContent(web_contents(), invalidation_token,
+    // std::move(callback));
+    pending_get_page_content_callback_ = std::move(callback);
   }
 }
 
