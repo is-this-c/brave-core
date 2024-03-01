@@ -1,7 +1,7 @@
 /* Copyright (c) 2021 The Brave Authors. All rights reserved.
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
- * You can obtain one at http://mozilla.org/MPL/2.0/. */
+ * You can obtain one at https://mozilla.org/MPL/2.0/. */
 
 #include <optional>
 #include <vector>
@@ -119,6 +119,30 @@ PermissionRequest::PermissionRequest(
                                      uses_automatic_embargo) {}
 
 PermissionRequest::~PermissionRequest() = default;
+
+#if BUILDFLAG(IS_ANDROID)
+PermissionRequest::AnnotatedMessageText
+PermissionRequest::GetDialogAnnotatedMessageText(
+    const GURL& embedding_origin) const {
+  if (request_type() != RequestType::kStorageAccess) {
+    return PermissionRequest_ChromiumImpl::GetDialogAnnotatedMessageText(
+        embedding_origin);
+  }
+  std::u16string requesting_origin_string_formatted =
+      url_formatter::FormatUrlForSecurityDisplay(
+          requesting_origin(),
+          url_formatter::SchemeDisplay::OMIT_CRYPTOGRAPHIC);
+  std::u16string embedding_origin_string_formatted =
+      url_formatter::FormatUrlForSecurityDisplay(
+          embedding_origin, url_formatter::SchemeDisplay::OMIT_CRYPTOGRAPHIC);
+  return AnnotatedMessageText(
+      l10n_util::GetStringFUTF16(IDS_STORAGE_ACCESS_INFOBAR_TEXT,
+                                 requesting_origin_string_formatted,
+                                 embedding_origin_string_formatted),
+      /*bolded_ranges=*/{});
+  }
+}
+#endif
 
 bool PermissionRequest::SupportsLifetime() const {
   const RequestType kExcludedTypes[] = {
