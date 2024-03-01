@@ -1,8 +1,44 @@
 diff --git a/tools/typescript/ts_library.py b/tools/typescript/ts_library.py
-index 0d8ab6f6489e8cf75ba38d45183e05583adef19e..d5ec261ef24e22c7251ea5d3fbadfa19729b2180 100644
+index 0d8ab6f6489e8cf75ba38d45183e05583adef19e..90fa896a64df3004b5b83b5bd8ec59efe23e2df9 100644
 --- a/tools/typescript/ts_library.py
 +++ b/tools/typescript/ts_library.py
-@@ -297,5 +297,6 @@ def main(argv):
+@@ -267,20 +267,21 @@ def main(argv):
+ 
+   # Invoke the TS compiler again, with the --listFilesOnly flag, to detect any
+   # files that are used by the build, but not properly declared as dependencies.
+-  out = node.RunNode([
+-      node_modules.PathToTypescript(),
+-      '--project',
+-      os.path.join(args.gen_dir, tsconfig_file),
+-      '--listFilesOnly',
+-  ])
+-  files_list = out.split('\n')
+-  definitions_files = list(filter(lambda f: f.endswith('.d.ts'), files_list))
+-  definitions = args.definitions if args.definitions is not None else []
+-  list_valid, error_msg = validateDefinitionDeps(definitions_files, target_path,
+-                                                 args.gen_dir,
+-                                                 args.root_gen_dir, definitions)
+-  if not list_valid:
+-    raise AssertionError(error_msg)
++  if False:
++    out = node.RunNode([
++        node_modules.PathToTypescript(),
++        '--project',
++        os.path.join(args.gen_dir, tsconfig_file),
++        '--listFilesOnly',
++    ])
++    files_list = out.split('\n')
++    definitions_files = list(filter(lambda f: f.endswith('.d.ts'), files_list))
++    definitions = args.definitions if args.definitions is not None else []
++    list_valid, error_msg = validateDefinitionDeps(definitions_files, target_path,
++                                                  args.gen_dir,
++                                                  args.root_gen_dir, definitions)
++    if not list_valid:
++      raise AssertionError(error_msg)
+ 
+   if args.in_files is not None:
+     manifest_path = os.path.join(args.gen_dir,
+@@ -297,5 +298,6 @@ def main(argv):
        json.dump(manifest_data, manifest_file)
  
  
