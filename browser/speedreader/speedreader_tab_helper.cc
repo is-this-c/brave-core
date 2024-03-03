@@ -330,7 +330,7 @@ void SpeedreaderTabHelper::UpdateUI() {
           ->ShowReaderModeToolbar();
     }
 
-    browser->window()->UpdatePageActionIcon(PageActionIconType::kReaderMode);
+    browser->window()->UpdatePageActionIcon(PageActionIconType::kReadAnything);
   }
 #endif
 }

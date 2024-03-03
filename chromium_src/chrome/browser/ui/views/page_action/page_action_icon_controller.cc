@@ -9,7 +9,6 @@
 #include "brave/components/brave_player/common/buildflags/buildflags.h"
 #include "brave/components/playlist/common/buildflags/buildflags.h"
 #include "chrome/browser/ui/page_action/page_action_icon_type.h"
-#include "chrome/browser/ui/views/reader_mode/reader_mode_icon_view.h"
 
 #if BUILDFLAG(ENABLE_PLAYLIST_WEBUI)
 #include "brave/browser/ui/views/playlist/playlist_action_icon_view.h"

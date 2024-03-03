@@ -170,7 +170,7 @@ class SpeedReaderBrowserTest : public InProcessBrowserTest {
   PageActionIconView* GetReaderButton() {
     return BrowserView::GetBrowserViewForBrowser(browser())
         ->toolbar_button_provider()
-        ->GetPageActionIconView(PageActionIconType::kReaderMode);
+        ->GetPageActionIconView(PageActionIconType::kReadAnything);
   }
 
   void WaitDistilled(speedreader::SpeedreaderTabHelper* th = nullptr) {
