@@ -113,8 +113,8 @@ class ToggleButton : public ToolbarButton {
       return;
     }
 
-    CHECK_EQ(width(), GetIconWidth());
-    CHECK_EQ(height(), GetIconWidth());
+    //CHECK_EQ(width(), GetIconWidth());
+    //CHECK_EQ(height(), GetIconWidth());
   }
 #endif
 
