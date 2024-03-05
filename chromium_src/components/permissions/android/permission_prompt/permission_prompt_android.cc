@@ -16,7 +16,7 @@ namespace permissions {
 
 int PermissionPromptAndroid::GetIconId() const {
   const std::vector<raw_ptr<PermissionRequest, VectorExperimental>>& requests =
-      delegate_->Requests();
+      delegate()->Requests();
   if (requests.size() == 1) {
     if (requests[0]->request_type() == RequestType::kStorageAccess) {
       return permissions::GetIconId(requests[0]->request_type());
@@ -30,5 +30,3 @@ bool PermissionPromptAndroid::ShouldUseRequestingOriginFavicon() const {
 }
 
 }  // namespace permissions
-
-#endif  // BRAVE_CHROMIUM_SRC_COMPONENTS_PERMISSIONS_ANDROID_PERMISSION_PROMPT_PERMISSION_PROMPT_ANDROID_H_

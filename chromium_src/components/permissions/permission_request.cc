@@ -140,7 +140,6 @@ PermissionRequest::GetDialogAnnotatedMessageText(
                                  requesting_origin_string_formatted,
                                  embedding_origin_string_formatted),
       /*bolded_ranges=*/{});
-  }
 }
 #endif
 

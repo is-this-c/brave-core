@@ -6,6 +6,8 @@
 #ifndef BRAVE_CHROMIUM_SRC_COMPONENTS_PERMISSIONS_ANDROID_PERMISSION_PROMPT_PERMISSION_PROMPT_ANDROID_H_
 #define BRAVE_CHROMIUM_SRC_COMPONENTS_PERMISSIONS_ANDROID_PERMISSION_PROMPT_PERMISSION_PROMPT_ANDROID_H_
 
+#include "components/permissions/request_type.h"
+
 #define PermissionPromptAndroid PermissionPromptAndroid_ChromiumImpl
 #define GetIconId virtual GetIconId
 #define ShouldUseRequestingOriginFavicon \
