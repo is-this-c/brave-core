@@ -40,6 +40,11 @@ class PermissionRequest : public PermissionRequest_ChromiumImpl {
 #if BUILDFLAG(IS_ANDROID)
   AnnotatedMessageText GetDialogAnnotatedMessageText(
       const GURL& embedding_origin) const override;
+
+  static AnnotatedMessageText GetDialogAnnotatedMessageText(
+      std::u16string requesting_origin_formatted_for_display,
+      int message_id,
+      bool format_origin_bold);
 #endif
 
   bool SupportsLifetime() const;

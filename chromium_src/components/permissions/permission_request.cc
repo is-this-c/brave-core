@@ -141,6 +141,16 @@ PermissionRequest::GetDialogAnnotatedMessageText(
                                  embedding_origin_string_formatted),
       /*bolded_ranges=*/{});
 }
+
+// static
+PermissionRequest::AnnotatedMessageText
+PermissionRequest::GetDialogAnnotatedMessageText(
+    std::u16string requesting_origin_formatted_for_display,
+    int message_id,
+    bool format_origin_bold) {
+  return PermissionRequest_ChromiumImpl::GetDialogAnnotatedMessageText(
+      requesting_origin_formatted_for_display, message_id, format_origin_bold);
+}
 #endif
 
 bool PermissionRequest::SupportsLifetime() const {
