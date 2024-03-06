@@ -43,7 +43,7 @@ class AIChatTabHelper : public content::WebContentsObserver,
 
   void SetOnPDFA11yInfoLoadedCallbackForTesting(base::OnceClosure cb);
 
-  void OnPreviewReady(const SkBitmap&);
+  void OnPreviewReady(const std::optional<std::vector<SkBitmap>>&);
 
  private:
   friend class content::WebContentsUserData<AIChatTabHelper>;
