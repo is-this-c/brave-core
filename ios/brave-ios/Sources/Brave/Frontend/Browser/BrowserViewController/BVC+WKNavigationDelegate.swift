@@ -1706,11 +1706,23 @@ extension BrowserViewController: WKUIDelegate {
     }
 
     // Handle query param stripping
-    return navigationAction.request.stripQueryParams(
+    if let request = navigationAction.request.stripQueryParams(
       initiatorURL: tab.committedURL,
       redirectSourceURL: tab.redirectSourceURL,
       isInternalRedirect: tab.isInternalRedirect
-    )
+    ) {
+      return request
+    }
+
+    // Attempt to upgrade to HTTPS
+    if let upgradedURL = braveCore.httpsUpgradeExceptionsService.upgradeToHTTPS(for: requestURL) {
+      tab.upgradedHTTPSRequest = navigationAction.request
+      var request = navigationAction.request
+      request.url = upgradedURL
+      return request
+    }
+
+    return nil
   }
 }
 

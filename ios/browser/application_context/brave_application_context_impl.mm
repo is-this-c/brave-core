@@ -14,6 +14,7 @@
 #include "brave/components/brave_component_updater/browser/local_data_files_service.h"
 #include "brave/components/brave_wallet/browser/wallet_data_files_installer.h"
 #include "brave/components/debounce/core/browser/debounce_component_installer.h"
+#include "brave/components/https_upgrade_exceptions/browser/https_upgrade_exceptions_service.h"
 #include "brave/components/url_sanitizer/browser/url_sanitizer_component_installer.h"
 #include "brave/ios/browser/brave_wallet/wallet_data_files_installer_delegate_impl.h"
 #include "ios/chrome/browser/shared/model/application_context/application_context.h"
@@ -82,6 +83,16 @@ BraveApplicationContextImpl::debounce_component_installer() {
             local_data_files_service());
   }
   return debounce_component_installer_.get();
+}
+
+https_upgrade_exceptions::HttpsUpgradeExceptionsService*
+BraveApplicationContextImpl::https_upgrade_exceptions_service() {
+  if (!https_upgrade_exceptions_service_) {
+    https_upgrade_exceptions_service_ =
+        https_upgrade_exceptions::HttpsUpgradeExceptionsServiceFactory(
+            local_data_files_service());
+  }
+  return https_upgrade_exceptions_service_.get();
 }
 
 void BraveApplicationContextImpl::StartBraveServices() {
