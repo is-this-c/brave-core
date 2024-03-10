@@ -213,8 +213,9 @@ class BraveBrowserTypeImpl(BrowserType):
       DownloadFile(url, apk_filename)
       return apk_filename
 
-    brave_platform = ToBravePlatformName(target_os)
-    url = _GetBraveDownloadUrl(tag, f'brave-{tag}-{brave_platform}.zip')
+    if url is None:
+      brave_platform = ToBravePlatformName(target_os)
+      url = _GetBraveDownloadUrl(tag, f'brave-{tag}-{brave_platform}.zip')
     DownloadArchiveAndUnpack(out_dir, url)
     _FixUpUnpackedBrowser(out_dir)
 
