@@ -43,6 +43,8 @@ class AIChatTabHelper : public content::WebContentsObserver,
 
   void SetOnPDFA11yInfoLoadedCallbackForTesting(base::OnceClosure cb);
 
+  // This will be called when print preview has been composited into image per
+  // page.
   void OnPreviewReady(const std::optional<std::vector<SkBitmap>>&);
 
  private:

@@ -32,8 +32,8 @@
 #include "content/public/browser/navigation_entry.h"
 #include "content/public/browser/scoped_accessibility_mode.h"
 #include "content/public/browser/storage_partition.h"
-#include "include/core/SkBitmap.h"
 #include "pdf/buildflags.h"
+#include "third_party/skia/include/core/SkBitmap.h"
 #include "ui/accessibility/ax_mode.h"
 #include "ui/base/l10n/l10n_util.h"
 
