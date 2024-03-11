@@ -511,6 +511,9 @@ void AIChatUIPageHandler::MaybeCreatePrintPreview() {
     if (!print_render_frame_.is_bound()) {
       rfh->GetRemoteAssociatedInterfaces()->GetInterface(&print_render_frame_);
     }
+
+    print_render_frame_->InitiatePrintPreview(false);
+
     if (!owner_->IsBound()) {
       print_render_frame_->SetPrintPreviewUI(owner_->BindPrintPreviewUI());
     }
@@ -520,8 +523,6 @@ void AIChatUIPageHandler::MaybeCreatePrintPreview() {
       preview_ui_id = owner_->GetPreviewUIId();
     }
     CHECK(preview_ui_id);
-
-    print_render_frame_->InitiatePrintPreview(false);
 
     // A mininum print setting to avoid PrinterSettingsInvalid
     auto settings = base::JSONReader::Read(R"({
