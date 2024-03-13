@@ -65,9 +65,7 @@ async function RunCommand() {
     program.sync_chromium = false
   }
 
-  if (program.init || !fs.existsSync(config.depotToolsDir)) {
-    syncUtil.maybeInstallDepotTools()
-  }
+  syncUtil.installDepotTools()
 
   if (program.init || !fs.existsSync(config.defaultGClientFile)) {
     syncUtil.buildDefaultGClientConfig(targetOSList, targetArchList)
