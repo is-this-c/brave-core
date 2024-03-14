@@ -97,7 +97,7 @@ void AIChatTabHelper::OnPDFA11yInfoLoaded() {
   is_pdf_a11y_info_loaded_ = true;
   if (pending_get_page_content_callback_) {
     FetchPageContent(web_contents(), "", std::nullopt,
-                     GetCurrentModel().max_page_content_length,
+                     GetMaxPageContentLength(),
                      std::move(pending_get_page_content_callback_));
   }
   pdf_load_observer_.reset();
@@ -109,8 +109,7 @@ void AIChatTabHelper::OnPDFA11yInfoLoaded() {
 void AIChatTabHelper::OnPreviewReady(
     const std::optional<std::vector<SkBitmap>>& bitmaps) {
   if (pending_get_page_content_callback_) {
-    FetchPageContent(web_contents(), "", bitmaps,
-                     GetCurrentModel().max_page_content_length,
+    FetchPageContent(web_contents(), "", bitmaps, GetMaxPageContentLength(),
                      std::move(pending_get_page_content_callback_));
   }
 }
@@ -222,14 +221,20 @@ void AIChatTabHelper::GetPageContent(GetPageContentCallback callback,
       pending_get_page_content_callback_ = std::move(callback);
     } else {
       FetchPageContent(web_contents(), invalidation_token, std::nullopt,
-                       GetCurrentModel().max_page_content_length,
-                       std::move(callback));
+                       GetMaxPageContentLength(), std::move(callback));
     }
   }
 }
 
 std::u16string AIChatTabHelper::GetPageTitle() const {
   return web_contents()->GetTitle();
+}
+
+uint32_t AIChatTabHelper::GetMaxPageContentLength() {
+  if (max_page_content_length_for_testing_) {
+    return *max_page_content_length_for_testing_;
+  }
+  return GetCurrentModel().max_page_content_length;
 }
 
 WEB_CONTENTS_USER_DATA_KEY_IMPL(AIChatTabHelper);
