@@ -61,6 +61,7 @@ import {
 import { UnlockedWalletRoutes } from './router/unlocked_wallet_routes'
 import { Swap } from './screens/swap/swap'
 import { SendScreen } from './screens/send/send_screen/send_screen'
+import { loadTimeData } from '../../common/loadTimeData'
 
 const initialSessionRoute = getInitialSessionRoute()
 
@@ -84,6 +85,9 @@ export const Container = () => {
   const setupStillInProgress = useSafePageSelector(
     PageSelectors.setupStillInProgress
   )
+
+  // TODO(stephenheaps): Remove once using Buy/Send/Swap directly.
+  const isIOS = loadTimeData.getBoolean('isIOS') || false
 
   // state
   const [sessionRoute, setSessionRoute] = React.useState(initialSessionRoute)
@@ -175,7 +179,7 @@ export const Container = () => {
         redirectRoute={defaultRedirect}
         exact={true}
       >
-        <Swap />
+        <Swap isIOS={isIOS} />
       </ProtectedRoute>
 
       <ProtectedRoute
@@ -184,7 +188,7 @@ export const Container = () => {
         redirectRoute={defaultRedirect}
         exact={true}
       >
-        <SendScreen />
+        <SendScreen isIOS={isIOS} />
       </ProtectedRoute>
 
       <ProtectedRoute

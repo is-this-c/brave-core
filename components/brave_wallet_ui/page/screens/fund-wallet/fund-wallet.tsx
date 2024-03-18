@@ -112,12 +112,14 @@ const getItemKey = (i: number, data: BraveWallet.BlockchainToken[]) =>
 
 interface Props {
   isAndroid?: boolean
+  isIOS?: boolean
 }
 interface Params {
   assetId: string
 }
 
-export const FundWalletScreen = ({ isAndroid }: Props) => {
+export const FundWalletScreen = (props: Props) => {
+  const { isAndroid = false, isIOS = false } = props
   // render
   return (
     <Switch>
@@ -125,14 +127,14 @@ export const FundWalletScreen = ({ isAndroid }: Props) => {
         path={WalletRoutes.FundWalletPurchaseOptionsPage}
         exact
       >
-        <PurchaseOptionSelection isAndroid={isAndroid} />
+        <PurchaseOptionSelection isAndroid={isAndroid} isIOS={isIOS} />
       </Route>
 
       <Route
         path={WalletRoutes.FundWalletPage}
         exact
       >
-        <AssetSelection isAndroid={isAndroid} />
+        <AssetSelection isAndroid={isAndroid} isIOS={isIOS} />
       </Route>
 
       <Redirect to={WalletRoutes.FundWalletPage} />
@@ -140,7 +142,8 @@ export const FundWalletScreen = ({ isAndroid }: Props) => {
   )
 }
 
-function AssetSelection({ isAndroid }: Props) {
+function AssetSelection({ isAndroid, isIOS }: Props) {
+  const isMobile = isAndroid || isIOS
   // routing
   const history = useHistory()
   const { assetId: selectedOnRampAssetId } = useParams<Params>()
@@ -272,7 +275,7 @@ function AssetSelection({ isAndroid }: Props) {
           userAssetList={assetListSearchResults}
           estimatedItemSize={itemSize}
           renderToken={renderToken}
-          maximumViewableTokens={isPanel ? 2.5 : 4.5}
+          maximumViewableTokens={(isPanel || isIOS) ? 2.5 : 4.5}
         />
       ) : (
         <Column>
@@ -321,8 +324,8 @@ function AssetSelection({ isAndroid }: Props) {
     return (
       <WalletPageWrapper
         wrapContentInBox={true}
-        hideNav={isAndroid}
-        hideHeader={isAndroid}
+        hideNav={isMobile}
+        hideHeader={isMobile}
         cardHeader={
           <PageTitleHeader
             title={pageTitle}
@@ -350,8 +353,8 @@ function AssetSelection({ isAndroid }: Props) {
   return (
     <WalletPageWrapper
       wrapContentInBox={true}
-      hideNav={isAndroid}
-      hideHeader={isAndroid}
+      hideNav={isMobile}
+      hideHeader={isMobile}
       cardHeader={<PageTitleHeader title={pageTitle} />}
     >
       <Column
@@ -460,7 +463,8 @@ function AssetSelection({ isAndroid }: Props) {
   )
 }
 
-function PurchaseOptionSelection({ isAndroid }: Props) {
+function PurchaseOptionSelection({ isAndroid, isIOS }: Props) {
+  const isMobile = isAndroid || isIOS
   // routing
   const history = useHistory()
   const { assetId: selectedOnRampAssetId } = useParams<Params>()
@@ -663,8 +667,8 @@ function PurchaseOptionSelection({ isAndroid }: Props) {
   return (
     <WalletPageWrapper
       wrapContentInBox={true}
-      hideNav={isAndroid}
-      hideHeader={isAndroid}
+      hideNav={isMobile}
+      hideHeader={isMobile}
       cardHeader={
         <PageTitleHeader
           title={pageTitle}

@@ -38,7 +38,12 @@ import { DefaultPanelHeader } from '../../../components/desktop/card-headers/def
 // Styled Components
 import { Row } from '../../../components/shared/style'
 
-export const Swap = () => {
+interface Props {
+  isIOS?: boolean
+}
+
+export const Swap = React.memo((props: Props) => {
+  const { isIOS = false } = props
   // Hooks
   const swap = useSwap()
   const {
@@ -116,6 +121,8 @@ export const Swap = () => {
       <WalletPageWrapper
         wrapContentInBox={true}
         noCardPadding={true}
+        hideNav={isIOS}
+        hideHeader={isIOS}
         noMinCardHeight={true}
         hideDivider={true}
         cardHeader={
@@ -247,4 +254,4 @@ export const Swap = () => {
       )}
     </>
   )
-}
+})

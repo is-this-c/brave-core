@@ -124,6 +124,7 @@ import { OrdinalsWarningMessage } from '../components/ordinals-warning-message/o
 
 interface Props {
   isAndroid?: boolean
+  isIOS?: boolean
 }
 
 const ErrorFailedChecksumMessage: AddressMessageInfo = {
@@ -137,7 +138,8 @@ const WarningFailedChecksumMessage: AddressMessageInfo = {
 }
 
 export const SendScreen = React.memo((props: Props) => {
-  const { isAndroid = false } = props
+  const { isAndroid = false, isIOS = false } = props
+  const isMobile = isAndroid || isIOS
 
   // routing
   const query = useQuery()
@@ -738,8 +740,8 @@ export const SendScreen = React.memo((props: Props) => {
       <WalletPageWrapper
         wrapContentInBox={true}
         noCardPadding={true}
-        hideNav={isAndroid}
-        hideHeader={isAndroid}
+        hideNav={isMobile}
+        hideHeader={isMobile}
         noMinCardHeight={true}
         hideDivider={true}
         cardHeader={
