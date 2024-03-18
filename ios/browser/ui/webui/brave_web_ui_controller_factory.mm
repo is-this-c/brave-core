@@ -61,7 +61,7 @@ WebUIIOSFactoryFunction GetWebUIIOSFactoryFunction(const GURL& url) {
              brave_rewards::IsSupportedForProfile(browser_state)) {
     return &NewWebUIIOS<BraveRewardsInternalsUI>;
   }*/
-  
+
   if (url_host == kWalletPageHost) {
     return &NewWebUIIOS<BraveWalletPageUI>;
   }

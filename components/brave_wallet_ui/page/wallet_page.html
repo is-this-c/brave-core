@@ -3,15 +3,27 @@
   <head>
   <base href="/">
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
+  <!-- TODO(stephenheaps): Only assign initial-scale & maximum scale on iOS.
+  Remove changes when we only use FundWalletScreen/SendScreen/Swap directly.
+  <meta name="viewport" content="width=device-width"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>Brave Wallet</title>
-  <link rel="stylesheet" href="chrome://resources/css/md_colors.css">
+  <!-- TODO(stephenheaps): Resolve this once md_colors.css available to iOS.
+  Remove changes when we only use FundWalletScreen/SendScreen/Swap directly.
+  <link rel="stylesheet" href="chrome://resources/css/md_colors.css"> -->
   <link rel="stylesheet" href="chrome://resources/brave/fonts/poppins.css">
   <link rel="stylesheet" href="chrome://resources/brave/fonts/inter.css">
   <link rel="stylesheet" href="chrome://resources/brave/leo/css/variables.css">
+  <!-- TODO(crbug.com/487000): Remove this once injected by web. -->
+  <!-- TODO(stephenheaps): Inject only on iOS. 
+  Remove changes when we only use FundWalletScreen/SendScreen/Swap directly. -->
+  <script src="chrome://resources/js/ios/web_ui.js"></script>
+  <script src="chrome://resources/js/ios/mojo_api.js"></script>
   <script src="chrome://resources/js/load_time_data_deprecated.js"></script>
   <script src="/strings.js"></script>
-  <script type="module" src="chrome://resources/brave/br_elements/br_toolbar/br_toolbar.js"></script>
+  <!-- TODO(stephenheaps): br_toolbar.js currently unavailable to iOS.
+  Remove changes when we only use FundWalletScreen/SendScreen/Swap directly.
+  <script type="module" src="chrome://resources/brave/br_elements/br_toolbar/br_toolbar.js"></script> -->
   <style>
     html {
       background-color: var(--leo-color-container-background);

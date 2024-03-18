@@ -1,3 +1,8 @@
+// Copyright (c) 2024 The Brave Authors. All rights reserved.
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this file,
+// You can obtain one at https://mozilla.org/MPL/2.0/.
+
 #include "brave/ios/browser/api/ui/webui/wallet/blockchain_images_source.h"
 
 #include "base/files/file_util.h"
@@ -13,10 +18,10 @@ namespace brave_wallet {
 
 namespace {
 
-absl::optional<std::string> ReadFileToString(const base::FilePath& path) {
+std::optional<std::string> ReadFileToString(const base::FilePath& path) {
   std::string contents;
   if (!base::ReadFileToString(path, &contents)) {
-    return absl::optional<std::string>();
+    return std::optional<std::string>();
   }
   return contents;
 }
@@ -32,12 +37,13 @@ std::string BlockchainImagesSource::GetSource() const {
   return kImageSourceHost;
 }
 
-void BlockchainImagesSource::StartDataRequest(const std::string& path, GotDataCallback callback) {
+void BlockchainImagesSource::StartDataRequest(const std::string& path,
+                                              GotDataCallback callback) {
   DCHECK_CURRENTLY_ON(web::WebThread::UI);
 
-  //const std::string path = web::URLDataSourceIOS::URLToRequestPath(url);
+  // const std::string path = web::URLDataSourceIOS::URLToRequestPath(url);
 
-  absl::optional<base::Version> version =
+  std::optional<base::Version> version =
       brave_wallet::GetLastInstalledWalletVersion();
   if (!version) {
     scoped_refptr<base::RefCountedMemory> bytes;
@@ -57,7 +63,7 @@ void BlockchainImagesSource::StartDataRequest(const std::string& path, GotDataCa
 }
 
 void BlockchainImagesSource::OnGotImageFile(GotDataCallback callback,
-                                            absl::optional<std::string> input) {
+                                            std::optional<std::string> input) {
   scoped_refptr<base::RefCountedMemory> bytes;
   if (!input) {
     std::move(callback).Run(std::move(bytes));

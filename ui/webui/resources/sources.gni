@@ -22,7 +22,6 @@ brave_resources_extra_grdps = []
 
 brave_resources_extra_grdps_deps = []
 
-# ios does not need any static resources
 brave_resources_extra_grdps += [
   "$brave_resources_extra_grdps_path/brave_fonts_resources.grdp",
   "$brave_resources_extra_grdps_path/brave_static_resources.grdp",

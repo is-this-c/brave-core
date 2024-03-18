@@ -1,19 +1,26 @@
+// Copyright (c) 2024 The Brave Authors. All rights reserved.
+// This Source Code Form is subject to the terms of the Mozilla Public
+// License, v. 2.0. If a copy of the MPL was not distributed with this file,
+// You can obtain one at https://mozilla.org/MPL/2.0/.
 
+#ifndef BRAVE_IOS_BROWSER_API_UI_WEBUI_WALLET_BRAVE_WALLET_PAGE_UI_H_
+#define BRAVE_IOS_BROWSER_API_UI_WEBUI_WALLET_BRAVE_WALLET_PAGE_UI_H_
+
+#include <memory>
+#include "brave/components/brave_wallet/common/brave_wallet.mojom.h"
 #include "brave/ios/browser/api/ui/webui/wallet/wallet_handler.h"
 #include "brave/ios/browser/api/ui/webui/wallet/wallet_page_handler.h"
-#include "brave/components/brave_wallet/common/brave_wallet.mojom.h"
-#include "ios/web/public/webui/web_ui_ios_controller.h"
 #include "ios/web/public/webui/web_ui_ios.h"
+#include "ios/web/public/webui/web_ui_ios_controller.h"
 
 #include "mojo/public/cpp/bindings/pending_receiver.h"
 #include "mojo/public/cpp/bindings/pending_remote.h"
 #include "mojo/public/cpp/bindings/receiver.h"
 
-
 // MARK: - BASED ON: components/commerce/core/internals/BUILD.gn
 
 class BraveWalletPageUI : public web::WebUIIOSController,
-                        public brave_wallet::mojom::PageHandlerFactory {
+                          public brave_wallet::mojom::PageHandlerFactory {
  public:
   explicit BraveWalletPageUI(web::WebUIIOS* web_ui, const GURL& url);
   BraveWalletPageUI(const BraveWalletPageUI&) = delete;
@@ -68,3 +75,5 @@ class BraveWalletPageUI : public web::WebUIIOSController,
   mojo::Receiver<brave_wallet::mojom::PageHandlerFactory>
       page_factory_receiver_{this};
 };
+
+#endif  // BRAVE_IOS_BROWSER_API_UI_WEBUI_WALLET_BRAVE_WALLET_PAGE_UI_H_
