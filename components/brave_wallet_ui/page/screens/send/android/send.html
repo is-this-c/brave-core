@@ -5,13 +5,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>Brave Send</title>
+    <link rel="stylesheet" href="chrome://resources/brave/fonts/poppins.css">
+    <link rel="stylesheet" href="chrome://resources/brave/fonts/inter.css">
+    <link rel="stylesheet" href="chrome://resources/brave/leo/css/variables.css">
     <!-- TODO(crbug.com/487000): Remove this once injected by web. -->
     <!-- TODO(stephenheaps): Only inject on iOS. -->
     <script src="chrome://resources/js/ios/web_ui.js"></script>
     <script src="chrome://resources/js/ios/mojo_api.js"></script>
     <script src="chrome://resources/js/load_time_data_deprecated.js"></script>
     <script src="/strings.js"></script>
-    <script src="/brave_wallet_send_page.bundle.js"></script>
     <style>
       html {
         /* Prevent layout shift when a vertical scrollbar is added  */
@@ -29,6 +31,7 @@
     </style>
     </head>
     <body>
+      <script src="/brave_wallet_send_page.bundle.js"></script>
       <div id="root"></div>
   </body>
 </html>

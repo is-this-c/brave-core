@@ -24,15 +24,12 @@ import { SimplePageWrapper } from '../screens/page-screen.styles'
 import {
   OnboardingSuccess //
 } from '../screens/onboarding/onboarding-success/onboarding-success'
-import { loadTimeData } from '../../../common/loadTimeData'
 
 export const UnlockedWalletRoutes = ({
   sessionRoute
 }: {
   sessionRoute: WalletRoutes | undefined
 }) => {
-  // TODO(stephenheaps): Remove once using Buy/Send/Swap directly.
-  const isIOS = loadTimeData.getBoolean('isIOS') || false
   // render
   return (
     <Switch>
@@ -58,7 +55,7 @@ export const UnlockedWalletRoutes = ({
       </Route>
 
       <Route path={WalletRoutes.FundWalletPageStart}>
-        <FundWalletScreen isIOS={isIOS} />
+        <FundWalletScreen />
       </Route>
 
       <Route path={WalletRoutes.DepositFundsPageStart}>

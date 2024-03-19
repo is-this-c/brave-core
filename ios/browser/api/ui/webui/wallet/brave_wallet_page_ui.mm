@@ -76,26 +76,23 @@ web::WebUIIOSDataSource* CreateAndAddWebUIDataSource(
 
 BraveWalletPageUI::BraveWalletPageUI(web::WebUIIOS* web_ui, const GURL& url)
     : web::WebUIIOSController(web_ui, url.host()) {
-  web::WebUIIOSDataSource* source = CreateAndAddWebUIDataSource(
-      web_ui, url.host(), kBraveWalletPageGenerated,
-      kBraveWalletPageGeneratedSize, IDR_WALLET_PAGE_HTML);
-  // TODO(stephenheaps): We should directly use Send/Swap and prevent access to 
-  // Wallet Page and other wallet WebUI screens.
-  // Currently hitting error: 
-  // `TypeError: Argument 1 ('element') to Window.getComputedStyle must be an instance of Element`
-  //   web::WebUIIOSDataSource* source;
-  //   if (url.path() == "/swap") {
-  //     source = CreateAndAddWebUIDataSource(
-  //       web_ui, url.host(), kBraveWalletSwapPageGenerated,
-  //       kBraveWalletSwapPageGeneratedSize, IDR_BRAVE_WALLET_SWAP_PAGE_HTML);
-  //   } else if (url.path() == "/send") {
-  //     source = CreateAndAddWebUIDataSource(
-  //       web_ui, url.host(), kBraveWalletSendPageGenerated,
-  //       kBraveWalletSendPageGeneratedSize, IDR_BRAVE_WALLET_SEND_PAGE_HTML);
-  //   } else {
-  //     VLOG(0) << "=!";
-  //     NOTREACHED();
-  //   }
+//   web::WebUIIOSDataSource* source = CreateAndAddWebUIDataSource(
+//       web_ui, url.host(), kBraveWalletPageGenerated,
+//       kBraveWalletPageGeneratedSize, IDR_WALLET_PAGE_HTML);
+  // TODO(stephenheaps): Leo assets missing...
+  web::WebUIIOSDataSource* source;
+  if (url.path() == "/swap") {
+    source = CreateAndAddWebUIDataSource(
+      web_ui, url.host(), kBraveWalletSwapPageGenerated,
+      kBraveWalletSwapPageGeneratedSize, IDR_BRAVE_WALLET_SWAP_PAGE_HTML);
+  } else if (url.path() == "/send") {
+    source = CreateAndAddWebUIDataSource(
+      web_ui, url.host(), kBraveWalletSendPageGenerated,
+      kBraveWalletSendPageGeneratedSize, IDR_BRAVE_WALLET_SEND_PAGE_HTML);
+  } else {
+    VLOG(0) << "=!";
+    NOTREACHED();
+  }
 
   for (const auto& str : brave_wallet::kLocalizedStrings) {
     std::u16string l10n_str =

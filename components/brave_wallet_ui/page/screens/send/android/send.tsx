@@ -32,6 +32,7 @@ import { SendScreen } from '../send_screen/send_screen'
 import { LibContext } from '../../../../common/context/lib.context'
 
 export function AndroidSendApp() {
+  const isIOS = loadTimeData.getBoolean('isIOS') || false
   return (
     <Provider store={store}>
       <BrowserRouter>
@@ -42,7 +43,7 @@ export function AndroidSendApp() {
           <LibContext.Provider value={Lib}>
             <Switch>
               <Route>
-                <SendScreen isAndroid={true} />
+                <SendScreen isAndroid={true} isIOS={isIOS} />
               </Route>
             </Switch>
           </LibContext.Provider>

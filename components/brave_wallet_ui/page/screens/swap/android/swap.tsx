@@ -32,6 +32,7 @@ import { Swap } from '../swap'
 import { LibContext } from '../../../../common/context/lib.context'
 
 export function AndroidSwapApp() {
+  const isIOS = loadTimeData.getBoolean('isIOS') || false
   return (
     <Provider store={store}>
       <BrowserRouter>
@@ -42,7 +43,7 @@ export function AndroidSwapApp() {
           <LibContext.Provider value={Lib}>
             <Switch>
               <Route>
-                <Swap />
+                <Swap isIOS={isIOS} />
               </Route>
             </Switch>
           </LibContext.Provider>
