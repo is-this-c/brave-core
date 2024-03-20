@@ -1,0 +1,12 @@
+diff --git a/chrome/browser/ui/tabs/recent_tabs_sub_menu_model_unittest.cc b/chrome/browser/ui/tabs/recent_tabs_sub_menu_model_unittest.cc
+index a1ea94f3368f89c7fd1e621a7eab26506778c552..7f361752c929cec8a8ad3043f45348e729f28b7f 100644
+--- a/chrome/browser/ui/tabs/recent_tabs_sub_menu_model_unittest.cc
++++ b/chrome/browser/ui/tabs/recent_tabs_sub_menu_model_unittest.cc
+@@ -180,6 +180,7 @@ class RecentTabsSubMenuModelTest : public BrowserWithTestWindowTest,
+     helper->VerifyExport(session_sync_service_->GetOpenTabsUIDelegate());
+   }
+ 
++  BRAVE_RECENT_TABS_SUB_MENU_MODEL_TEST
+  private:
+   raw_ptr<sync_sessions::SessionSyncService, DanglingUntriaged>
+       session_sync_service_;

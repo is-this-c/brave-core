@@ -1,0 +1,20 @@
+diff --git a/chrome/browser/ui/tabs/recent_tabs_sub_menu_model.cc b/chrome/browser/ui/tabs/recent_tabs_sub_menu_model.cc
+index 506e7a3fd04dd0bef4e2004650165f044a5cd930..2c41c126018339aeddca2ad2545be54db535173e 100644
+--- a/chrome/browser/ui/tabs/recent_tabs_sub_menu_model.cc
++++ b/chrome/browser/ui/tabs/recent_tabs_sub_menu_model.cc
+@@ -337,6 +337,7 @@ void RecentTabsSubMenuModel::Build() {
+   }
+   AddSeparator(ui::NORMAL_SEPARATOR);
+   history_separator_index_ = GetItemCount() - 1;
++  BRAVE_RECENT_TABS_SUB_MENU_MODEL_BUILD
+   BuildLocalEntries();
+   BuildTabsFromOtherDevices();
+ }
+@@ -477,6 +478,7 @@ void RecentTabsSubMenuModel::BuildTabsFromOtherDevices() {
+            ++k) {
+         BuildOtherDevicesTabItem(this, session_tag, *tabs_in_session[k]);
+       }  // for all tabs in one session
++      BRAVE_RECENT_TABS_SUB_MENU_MODEL_BUILD_TABS_FROM_OTHER_DEVICES
+     }
+     ++num_sessions_added;
+   }  // for all sessions
