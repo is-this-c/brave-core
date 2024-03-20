@@ -433,6 +433,18 @@ JNI_BraveSyncWorker_GetPureWordsFromTimeLimited(
                                                 pure_words_with_status.value());
 }
 
+static int64_t JNI_BraveSyncWorker_GetNotAfterFromFromTimeLimitedWords(
+  JNIEnv* env,
+  const base::android::JavaParamRef<jstring>& time_limited_words) {
+  std::string str_time_limited_words =
+      base::android::ConvertJavaStringToUTF8(time_limited_words);
+  DCHECK(!str_time_limited_words.empty());
+
+  auto not_after = brave_sync::TimeLimitedWords::GetNotAfter(str_time_limited_words);
+
+  return not_after.InMillisecondsSinceUnixEpoch() / 1000;
+}
+
 static base::android::ScopedJavaLocalRef<jstring>
 JNI_BraveSyncWorker_GetTimeLimitedWordsFromPure(
     JNIEnv* env,

@@ -28,6 +28,8 @@ namespace {
 static constexpr char kWordsv1SunsetDate[] = "Mon, 1 Aug 2022 00:00:00 GMT";
 static constexpr char kWordsv2Epoch[] = "Tue, 10 May 2022 00:00:00 GMT";
 
+static constexpr size_t kWordsV2Count = 25u;
+
 }  // namespace
 
 using base::Time;
@@ -137,7 +139,6 @@ TimeLimitedWords::ParseImpl(const std::string& time_limited_words,
   using ValidationStatus = TimeLimitedWords::ValidationStatus;
 
   static constexpr size_t kPureWordsCount = 24u;
-  static constexpr size_t kWordsV2Count = 25u;
 
   auto now = Time::Now();
 
@@ -208,6 +209,22 @@ std::string TimeLimitedWords::GenerateResultToText(
     case TimeLimitedWords::GenerateResult::kNotAfterEarlierThanEpoch:
       return "Requested not_after is earlier than sync words v2 epoch";
   }
+}
+
+// static
+base::Time TimeLimitedWords::GetNotAfter(const std::string& time_limited_words) {
+  std::vector<std::string> words = base::SplitString(
+      time_limited_words, " ", base::WhitespaceHandling::TRIM_WHITESPACE,
+      base::SplitResult::SPLIT_WANT_NONEMPTY);
+  size_t num_words = words.size();
+  DCHECK_EQ(num_words, kWordsV2Count);
+  if (num_words != kWordsV2Count) {
+    return base::Time();
+  }
+
+  int days_encoded = GetIndexByWord(words[kWordsV2Count - 1]);
+
+  return words_v2_epoch_ + base::Days(days_encoded);
 }
 
 }  // namespace brave_sync

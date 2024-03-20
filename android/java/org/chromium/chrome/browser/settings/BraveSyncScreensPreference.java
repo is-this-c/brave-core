@@ -49,6 +49,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentContainerView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -79,6 +80,12 @@ import org.chromium.ui.base.DeviceFormFactor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Settings fragment that allows to control Sync functionality.
@@ -1405,6 +1412,22 @@ public class BraveSyncScreensPreference extends BravePreferenceFragment
                                     } else {
                                         String qrCodeString =
                                                 getBraveSyncWorker().getQrDataJson(seedHex);
+
+                                        try {
+                                            JSONObject result = new JSONObject(qrCodeString);
+                                            int notAfterSecondsSinceUnixEpoch = result.getInt("not_after");
+                                            LocalDateTime  notAfterTime = LocalDateTime.ofEpochSecond(notAfterSecondsSinceUnixEpoch, 0, ZoneOffset.UTC);
+
+                                            setQrCountDown(notAfterTime);
+
+                                            int version = result.getInt("version");
+                                            assert version == 2;
+                                        } catch (JSONException e) {
+                                            Log.e(TAG, "GetSyncDeviceList JSONException error " + e);
+                                        } catch (IllegalStateException e) {
+                                            Log.e(TAG, "GetSyncDeviceList IllegalStateException error " + e);
+                                        }
+
                                         assert qrCodeString != null && !qrCodeString.isEmpty();
                                         ChromeBrowserInitializer.getInstance()
                                                 .runNowOrAfterFullBrowserStarted(
@@ -1413,6 +1436,12 @@ public class BraveSyncScreensPreference extends BravePreferenceFragment
                                 }
                             }
                         });
+  }
+
+  private void setQrCountDown(LocalDateTime notAfterTime) {
+    FragmentContainerView the_view = (FragmentContainerView)getView().findViewById(R.id.brave_sync_count_down_qr);
+    BraveSyncCodeCountdownFragment countdown = the_view.getFragment();
+    countdown.setNotAfter(notAfterTime);
   }
 
   private void fillQrCode(String qrDataFinal) {
@@ -1484,12 +1513,22 @@ public class BraveSyncScreensPreference extends BravePreferenceFragment
                                                 .getTimeLimitedWordsFromPure(codePhrase);
                                 assert timeLimitedWords != null && !timeLimitedWords.isEmpty();
                                 mBraveSyncAddDeviceCodeWords.setText(timeLimitedWords);
+
+                                LocalDateTime notAfterTime = getBraveSyncWorker()
+                                                .getNotAfterFromFromTimeLimitedWords(timeLimitedWords);
+                                setWordsCountDown(notAfterTime);
                             }
                         });
   }
 
+  private void setWordsCountDown(LocalDateTime notAfterTime) {
+    FragmentContainerView containerView = (FragmentContainerView)getView().findViewById(R.id.brave_sync_count_down_code_words);
+    BraveSyncCodeCountdownFragment countdown = containerView.getFragment();
+    countdown.setNotAfter(notAfterTime);
+  }
+
   private void setSyncDoneLayout() {
-        if (!mDeviceInfoObserverSet) {
+      if (!mDeviceInfoObserverSet) {
           BraveSyncDevices.get().addDeviceInfoChangedListener(this);
             mDeviceInfoObserverSet = true;
       }

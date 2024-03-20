@@ -50,6 +50,8 @@ class TimeLimitedWords {
   static std::string GenerateResultToText(
       const GenerateResult& generate_result);
 
+  static base::Time GetNotAfter(const std::string& time_limited_words);
+
  private:
   FRIEND_TEST_ALL_PREFIXES(TimeLimitedWordsTest, GenerateForDate);
   FRIEND_TEST_ALL_PREFIXES(TimeLimitedWordsTest, GetIndexByWord);
