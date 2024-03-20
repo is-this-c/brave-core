@@ -38,13 +38,17 @@ function ErrorRateLimit() {
       )
     }
 
+    const handleMaybeLater = () => {
+      getPageHandlerInstance().pageHandler.resetAPIResponseError()
+    }
+
     return (
       <PremiumSuggestion
         title={getLocale('rateLimitReachedTitle')}
         description={getLocale('rateLimitReachedDesc')}
         secondaryActionButton={
-          <Button kind='plain-faint' onClick={() => getPageHandlerInstance().pageHandler.retryAPIRequest()}>
-            {getLocale('retryButtonLabel')}
+          <Button kind='plain-faint' onClick={handleMaybeLater}>
+            {getLocale('maybeLaterLabel')}
           </Button>
         }
       />
