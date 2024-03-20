@@ -1064,7 +1064,7 @@ export interface BraveRewardsInfo {
 }
 
 export type AutoLockOption = {
-  value: number
+  minutes: number
   label: string
 }
 
