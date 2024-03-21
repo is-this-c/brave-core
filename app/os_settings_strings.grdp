@@ -6001,6 +6001,10 @@ Press an assigned switch or key to remove assignment.
   <message name="IDS_SETTINGS_PER_DEVICE_KEYBOARD_KEY_DISABLED" desc="In keyboard remap keys subpage, the dropdown list item for a disabled key.">
     Disabled
   </message>
+   <!-- TODO(b:329880993): Translate following strings before launch. -->
+  <message name="IDS_SETTINGS_PER_DEVICE_KEYBOARD_KEY_RIGHT_ALT" translateable="false" desc="In keyboard remap keys subpage, the dropdown list item for a right alt key.">
+    right alt
+  </message>
   <message name="IDS_SETTINGS_PER_DEVICE_CONNECTED_A11Y_LABEL" desc="The message announced to screen readers when a device is connected.">
     <ph name="DEVICE_NAME">$1<ex>Internal Keyboard</ex></ph> has been connected
   </message>
@@ -6065,6 +6069,10 @@ Press an assigned switch or key to remove assignment.
   </message>
   <message name="IDS_SETTINGS_KEYBOARD_SEND_FUNCTION_KEYS" desc="In Device Settings, the checkbox label for interpreting the top-row keys as function keys instead.">
     Treat top-row keys as function keys
+  </message>
+  <!-- TODO(b/329861823) Finalize and translate these strings -->
+  <message name="IDS_SETTINGS_KEYBOARD_COLORS" translateable="false" desc="In Device Settings, the direct link from Keyboard Settings to Personalization Hub's RGB keyboard control">
+    Keyboard Colors
   </message>
   <message name="IDS_SETTINGS_KEYBOARD_AUTO_REPEAT_ENABLE" desc="The checkbox label for enabling keyboard auto-repeat.">
     Press and hold to automatically repeat the key

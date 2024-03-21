@@ -12122,8 +12122,8 @@ This can include information about installed software, files, your browser, and 
         Loading account information...
       </message>
 
-      <!-- Dice Web Signin Interception Bubble-->
       <if expr="not chromeos_ash and not is_android and not chromeos_lacros">
+        <!-- Dice Web Signin Interception Bubble-->
         <message name="IDS_SIGNIN_DICE_WEB_INTERCEPT_BUBBLE_NEW_PROFILE_BUTTON_LABEL" desc="Label of the confirmation button in the web signin interception bubble">
           Ok
         </message>
@@ -12168,6 +12168,17 @@ This can include information about installed software, files, your browser, and 
         </message>
         <message name="IDS_SIGNIN_DICE_WEB_INTERCEPT_AVATAR_BUTTON_SWITCH_PROFILE_TEXT" desc="Text to be displayed on the extended avatar pill while the bubble for switching to a profile that has the account intercepted already signed into is displayed.">
           Switch Profile?
+        </message>
+
+        <!-- Brave Signout Confirmation Prompt -->
+        <message name="IDS_CHROME_SIGNOUT_CONFIRMATION_PROMPT_TITLE" translateable="false" desc="This is the title of an error message dialog that appears when the user opens the Brave Profile Menu and chooses 'Sign out of Brave'. The error message appears when the user has saved some data (like a password or payment method) to Brave, but Brave wasn't able to save the data to the user's Brave sync chain due to a sign-in error; but, the data has been saved locally to Brave. This title is before the 'Brave needs to verify it’s you before some data can be saved in your Brave sync chain and used on all your devices. If you sign out, this data will stay on this device.' string. The tone should be cautionary.">
+          Some data isn’t saved yet
+        </message>
+        <message name="IDS_CHROME_SIGNOUT_CONFIRMATION_PROMPT_VERIFY_BUTTON" translateable="false" desc="Text displayed the default button of the Brave signout confirmation prompt. The user will then be asked to reauthenticate.">
+          Verify it’s you
+        </message>
+        <message name="IDS_CHROME_SIGNOUT_CONFIRMATION_PROMPT_SIGNOUT_BUTTON" translateable="false" desc="This string is found on a button that lets the user sign out of Brave when the user taps it. It is on an error message dialog that appears when the user opens the Brave Profile Menu and chooses 'Sign out of Brave'. The error message appears when the user has saved some data (like a password or payment method) to Brave, but Brave wasn't able to save the data to the user's Brave sync chain due to a sign-in error; but, the data has been saved locally to Brave. This text is a verb and is short for the longer phrase 'Sign out of Brave anyway.'">
+          Sign out anyway
         </message>
       </if>
 
@@ -15277,9 +15288,6 @@ Please help our engineers fix this problem. Tell us what happened right before y
       <message name="IDS_WEBAUTHN_QR_CODE_ALT_TEXT" desc="Alt text for an image depicting a QR code. This will be read by screen readers to help blind and low vision users scan a QR code.">
         QR code
       </message>
-      <message name="IDS_WEBAUTHN_USE_A_DIFFERENT_DEVICE" desc="Label on a secondary button on a dialog for creating or using a passkey to sign into a website. Clicking this button will show a menu that lets the user pick a different device (such as a phone or hardware security key) to sign in.">
-         Use a different device
-      </message>
       <message name="IDS_WEBAUTHN_USE_A_DIFFERENT_PASSKEY" desc="Label on a secondary button on a dialog for creating or using a passkey to sign into a website. Clicking this button will show a menu that lets the user pick a different passkey or device (such as a phone or hardware security key) to sign in. Refer to Glossary for the meaning of 'passkey'; do not translate it as 'password'.">
          Use a different passkey
       </message>
@@ -15947,8 +15955,11 @@ Please help our engineers fix this problem. Tell us what happened right before y
     <message name="IDS_ACCOUNT_SELECTION_DATA_SHARING_CONSENT" desc="The consent text shown to the user before sign up.">
       To continue, <ph name="IDENTITY_PROVIDER_ETLD_PLUS_ONE">$1<ex>idp.com</ex></ph> will share your name, email address, and profile picture with this site. See this site's <ph name="BEGIN_LINK1">$2</ph>privacy policy<ph name="END_LINK1">$3</ph> and <ph name="BEGIN_LINK2">$4</ph>terms of service<ph name="END_LINK2">$5</ph>.
     </message>
-    <message name="IDS_ACCOUNT_SELECTION_USE_OTHER_ACCOUNT" desc="Title of the button that lets the user log in to a different account" translateable="false">
+    <message name="IDS_ACCOUNT_SELECTION_USE_OTHER_ACCOUNT" desc="Title of the button that lets the user log in to a different account." translateable="false">
       Use a different account
+    </message>
+    <message name="IDS_ACCOUNT_SELECTION_BACK" desc="Title of the button that lets the user go back to a previous sheet." translateable="false">
+      Back
     </message>
     <message name="IDS_SIGNIN_CONTINUE" desc="Title of the button that allows the user to continue with signing in to an account from an identity provider.">
       Continue
