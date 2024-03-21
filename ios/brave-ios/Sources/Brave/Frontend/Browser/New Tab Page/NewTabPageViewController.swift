@@ -118,6 +118,9 @@ class NewTabPageViewController: UIViewController {
   private var background: NewTabPageBackground
   private let backgroundView = NewTabPageBackgroundView()
   private let backgroundButtonsView: NewTabPageBackgroundButtonsView
+
+  private var videoBackgroundView = NewTabPageVideoBackgroundView()
+
   /// A gradient to display over background images to ensure visibility of
   /// the NTP contents and sponsored logo
   ///
@@ -298,7 +301,12 @@ class NewTabPageViewController: UIViewController {
 
     view.addSubview(backgroundView)
     view.insertSubview(gradientView, aboveSubview: backgroundView)
+
+    view.addSubview(videoBackgroundView)
+    videoBackgroundView.isHidden = true
+
     view.addSubview(collectionView)
+
     view.addSubview(feedOverlayView)
 
     collectionView.backgroundView = backgroundButtonsView
@@ -327,9 +335,17 @@ class NewTabPageViewController: UIViewController {
     }
 
     setupBackgroundImage()
+
+    setupVideoBackground()
+
     backgroundView.snp.makeConstraints {
       $0.edges.equalToSuperview()
     }
+
+    videoBackgroundView.snp.makeConstraints {
+      $0.edges.equalToSuperview()
+    }
+
     collectionView.snp.makeConstraints {
       $0.edges.equalToSuperview()
     }
@@ -374,6 +390,10 @@ class NewTabPageViewController: UIViewController {
     // Make sure that imageView has a frame calculated before we attempt
     // to use it.
     backgroundView.layoutIfNeeded()
+
+    videoBackgroundView.layoutIfNeeded()
+
+    updateVideoBackgroundVisibility()
 
     calculateBackgroundCenterPoints()
   }
@@ -432,6 +452,108 @@ class NewTabPageViewController: UIViewController {
         break
       }
     }
+  }
+
+  private func fadeOutAndHideCollectionView() {
+    UIView.animate(
+      withDuration: 0.3,
+      animations: { [weak self] in
+        self?.collectionView.alpha = 0
+      },
+      completion: { [weak self] _ in
+        self?.collectionView.isHidden = true
+        self?.collectionView.alpha = 1
+      }
+    )
+  }
+
+  private func showAndFadeInCollectionView() {
+    collectionView.isHidden = false
+    collectionView.alpha = 0
+    UIView.animate(
+      withDuration: 0.3,
+      animations: { [weak self] in
+        self?.collectionView.alpha = 1
+      }
+    )
+  }
+
+  private func shouldShowVideoBackground() -> Bool {
+    let isLandscape = view.frame.width > view.frame.height
+    let isPhone = UIDevice.isPhone
+    return !(isLandscape && isPhone)
+  }
+
+  private func updateVideoBackgroundVisibility() {
+    if shouldShowVideoBackground() {
+      videoBackgroundView.showPlayerLayer()
+      backgroundButtonsView.updatePlayButtonVisibility(hidePlayButton: false)
+    } else {
+      videoBackgroundView.cancelPlayAndHidePlayerLayer()
+      backgroundButtonsView.updatePlayButtonVisibility(hidePlayButton: true)
+    }
+  }
+
+  func setupVideoBackground() {
+    backgroundButtonsView.tappedPlayButton = { [weak self] in
+      self?.fadeOutAndHideCollectionView()
+      self?.videoBackgroundView.playOrPauseNTTVideo()
+    }
+
+    videoBackgroundView.videoLoadedEvent = { [weak self] succeeded in
+      if !succeeded {
+        if let ntpBackground = self?.background.currentBackground,
+          case .sponsoredImage(let back) = ntpBackground
+        {
+          self?.backgroundButtonsView.activeButton = .brandLogo(back.logo)
+        }
+      } else {
+        self?.backgroundButtonsView.setPlayButtonAvailable()
+      }
+    }
+    videoBackgroundView.autoplayFinishedEvent = { [weak self] in
+      if let ntpBackground = self?.background.currentBackground,
+        case .sponsoredImage(let back) = ntpBackground
+      {
+        self?.backgroundButtonsView.showPlayButtonAndSponsoredLogo(back.logo)
+      }
+    }
+    videoBackgroundView.playFinishedEvent = { [weak self] in
+      self?.showAndFadeInCollectionView()
+    }
+    videoBackgroundView.playCancelledEvent = { [weak self] in
+      self?.showAndFadeInCollectionView()
+    }
+    videoBackgroundView.played25PercentEvent = {
+      // TODO: Implement metrics for 25% played
+    }
+
+    if let background = background.currentBackground {
+      switch background {
+      case .sponsoredImage(let sponsoredBackground):
+        if let backgroundVideoPath = background.backgroundVideoPath {
+          if shouldShowVideoBackground() {
+            backgroundButtonsView.activeButton = .none
+            videoBackgroundView.setupPlayer(
+              backgroundVideoPath: backgroundVideoPath,
+              shouldStartAutoplay: true
+            )
+          } else {
+            backgroundButtonsView.activeButton = .brandLogo(sponsoredBackground.logo)
+            videoBackgroundView.setupPlayer(
+              backgroundVideoPath: backgroundVideoPath,
+              shouldStartAutoplay: false
+            )
+          }
+        }
+      case .image:
+        break
+      case .superReferral:
+        break
+      }
+    }
+
+    videoBackgroundView.isHidden = background.backgroundVideoPath == nil
   }
 
   func setupBackgroundImage() {
