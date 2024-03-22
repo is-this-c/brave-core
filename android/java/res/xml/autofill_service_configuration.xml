@@ -4,10 +4,7 @@
      License, v. 2.0. If a copy of the MPL was not distributed with this file,
      You can obtain one at https://mozilla.org/MPL/2.0/. -->
 <autofill-service
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:supportsInlineSuggestions="true"
-    tools:targetApi="r">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <compatibility-package
         android:name="com.android.chrome"
