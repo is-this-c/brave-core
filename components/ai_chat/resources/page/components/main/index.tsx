@@ -111,7 +111,7 @@ function Main() {
         <div className={styles.logo}>
           <Icon name='product-brave-leo' />
           <div className={styles.logoTitle}>
-            <span>Leo</span>
+            <span>leo ai</span>
           </div>
           {context.isPremiumUser && <div className={styles.badgePremium}>PREMIUM</div>}
         </div>
@@ -128,7 +128,16 @@ function Main() {
                 <Icon name='erase' />
               </Button>
             )}
-              <FeatureButtonMenu />
+            <FeatureButtonMenu />
+            <Button
+              kind='plain-faint'
+              aria-label='Close panel'
+              title='Close panel'
+              className={styles.closeButton}
+              onClick={() => getPageHandlerInstance().pageHandler.closePanel()}
+            >
+              <Icon name='close' />
+            </Button>
             </>
           )}
         </div>
