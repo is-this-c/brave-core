@@ -97,7 +97,7 @@ class ConversationDriver {
   bool GetShouldSendPageContents();
   void ClearConversationHistory();
   mojom::APIError GetCurrentAPIError();
-  void ResetCurrentAPIError();
+  mojom::ConversationTurnPtr ClearErrorAndGetFailedMessage();
   void GetPremiumStatus(
       mojom::PageHandler::GetPremiumStatusCallback callback);
   bool GetCanShowPremium();

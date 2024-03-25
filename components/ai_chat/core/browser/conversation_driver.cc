@@ -601,8 +601,18 @@ mojom::APIError ConversationDriver::GetCurrentAPIError() {
   return current_error_;
 }
 
-void ConversationDriver::ResetCurrentAPIError() {
+mojom::ConversationTurnPtr ConversationDriver::ClearErrorAndGetFailedMessage() {
+  DCHECK(!chat_history_.empty());
+
   SetAPIError(mojom::APIError::None);
+  mojom::ConversationTurnPtr turn = chat_history_.back().Clone();
+  chat_history_.pop_back();
+
+  for (auto& obs : observers_) {
+    obs.OnHistoryUpdate();
+  }
+
+  return turn;
 }
 
 void ConversationDriver::GenerateQuestions() {

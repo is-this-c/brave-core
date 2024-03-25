@@ -184,7 +184,7 @@ interface PageHandler {
   ClearConversationHistory();
   RetryAPIRequest();
   GetAPIResponseError() => (APIError error);
-  ResetAPIResponseError();
+  ClearErrorAndGetFailedMessage() => (ConversationTurn turn);
   GetCanShowPremiumPrompt() => (bool can_show);
   DismissPremiumPrompt();
 

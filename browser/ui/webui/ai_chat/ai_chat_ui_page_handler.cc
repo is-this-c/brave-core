@@ -282,8 +282,11 @@ void AIChatUIPageHandler::GetAPIResponseError(
   std::move(callback).Run(active_chat_tab_helper_->GetCurrentAPIError());
 }
 
-void AIChatUIPageHandler::ResetAPIResponseError() {
-  active_chat_tab_helper_->ResetCurrentAPIError();
+void AIChatUIPageHandler::ClearErrorAndGetFailedMessage(
+    ClearErrorAndGetFailedMessageCallback callback) {
+  mojom::ConversationTurnPtr failed_turn =
+      active_chat_tab_helper_->ClearErrorAndGetFailedMessage();
+  std::move(callback).Run(std::move(failed_turn));
 }
 
 void AIChatUIPageHandler::GetCanShowPremiumPrompt(

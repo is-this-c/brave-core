@@ -12,8 +12,11 @@ import DataContext from '../../state/context'
 import PremiumSuggestion from '../premium_suggestion'
 import styles from './alerts.module.scss'
 
+interface Props {
+  onFailed?: (turn: mojom.ConversationTurn) => void
+}
 
-function ErrorRateLimit() {
+function ErrorRateLimit(props: Props) {
   const context = React.useContext(DataContext)
 
   if (!context.isPremiumUser) {
@@ -39,7 +42,10 @@ function ErrorRateLimit() {
     }
 
     const handleMaybeLater = () => {
-      getPageHandlerInstance().pageHandler.resetAPIResponseError()
+      getPageHandlerInstance().pageHandler.clearErrorAndGetFailedMessage()
+        .then((res) => {
+          props.onFailed?.(res.turn)
+        })
     }
 
     return (

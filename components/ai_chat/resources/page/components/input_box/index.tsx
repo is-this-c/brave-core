@@ -17,8 +17,12 @@ import getPageHandlerInstance from '../../api/page_handler'
 const MAX_INPUT_CHAR = 2000
 const CHAR_LIMIT_THRESHOLD = MAX_INPUT_CHAR * 0.80
 
-function InputBox () {
-  const [inputText, setInputText] = React.useState('')
+interface InputBoxProps {
+  inputText?: string
+}
+
+function InputBox (props: InputBoxProps) {
+  const [inputText, setInputText] = React.useState(props.inputText ?? '')
   const context = React.useContext(DataContext)
 
   const isCharLimitExceeded = inputText.length >= MAX_INPUT_CHAR
@@ -56,6 +60,11 @@ function InputBox () {
       e.preventDefault()
     }
   }
+
+  React.useEffect(() => {
+    if (!props.inputText) return
+    setInputText(props.inputText)
+  }, [props.inputText])
 
   return (
     <form className={styles.form}>

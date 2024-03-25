@@ -64,6 +64,7 @@ function Main() {
 
   let scrollerElement: HTMLDivElement | null = null
   const scrollPos = React.useRef({ isAtBottom: true })
+  const [failedInputText, setFailedInputText] = React.useState('')
 
   if (hasAcceptedAgreement) {
     if (apiHasError && currentError === mojom.APIError.ConnectionIssue) {
@@ -76,7 +77,9 @@ function Main() {
 
     if (apiHasError && currentError === mojom.APIError.RateLimitReached) {
       currentErrorElement = (
-        <ErrorRateLimit />
+        <ErrorRateLimit
+          onFailed={(turn) => setFailedInputText(turn.text)}
+        />
       )
     }
 
@@ -205,7 +208,7 @@ function Main() {
             <PageContextToggle />
           </div>
         )}
-        <InputBox />
+        <InputBox inputText={failedInputText} />
       </div>
     </main>
   )
