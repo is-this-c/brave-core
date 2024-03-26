@@ -43,6 +43,7 @@ class WebcompatExceptionsService
                         const std::string& manifest) override;
 
   const WebcompatFeatureSet GetFeatureExceptions(const GURL& url);
+  bool IsFeatureDisabled(const GURL& url, WebcompatFeature feature);
   ~WebcompatExceptionsService() override;
   void SetIsReadyForTesting() { is_ready_ = true; }
   void OnJsonFileDataReady(const std::string& contents);

@@ -165,6 +165,13 @@ const WebcompatFeatureSet WebcompatExceptionsService::GetFeatureExceptions(
   return empty;
 }
 
+bool WebcompatExceptionsService::IsFeatureDisabled(const GURL& url,
+                                                   WebcompatFeature feature) {
+  WebcompatFeatureSet feature_set = GetFeatureExceptions(url);
+  return std::find(feature_set.begin(), feature_set.end(), feature) !=
+         feature_set.end();
+}
+
 // implementation of LocalDataFilesObserver
 void WebcompatExceptionsService::OnComponentReady(
     const std::string& component_id,
