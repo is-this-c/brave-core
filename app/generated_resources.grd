@@ -422,9 +422,16 @@ are declared in tools/grit/grit_rule.gni.
         Did you mean to go to <ph name="SITE">$1<ex>http://intranetsite/</ex></ph>?
       </message>
 
-      <message name="IDS_DOWNLOAD_TITLE" desc="Title for the downloads tab.">
-        Downloads
-      </message>
+      <if expr="use_titlecase">
+        <message name="IDS_DOWNLOAD_HISTORY_TITLE" desc="In Title Case: Title for the download history tab.">
+          Download History
+        </message>
+      </if>
+      <if expr="not use_titlecase">
+        <message name="IDS_DOWNLOAD_HISTORY_TITLE" desc="Title for the download history tab.">
+          Download history
+        </message>
+      </if>
       <message name="IDS_TAB_LOADING_TITLE" desc="The text to be displayed in the title of a tab before a title is discovered.">
         Loading...
       </message>
@@ -2048,6 +2055,9 @@ are declared in tools/grit/grit_rule.gni.
         <message name="IDS_DOWNLOAD_NOTIFICATION_DISPLAY_SOURCE" desc="The name of the notification source, which is download manager here. Shown in the notification header.">
           Download manager
         </message>
+        <message name="IDS_DOWNLOAD_NOTIFICATION_LABEL_OPEN_AND_EDIT" desc="Download notifications: Label for action button on notification to open a file that can be edited, e.g. a PDF file that can be annotated.">
+          Open and edit
+        </message>
       </if>
       <message name="IDS_DOWNLOAD_STATUS_IN_PROGRESS" desc="Size and units downloaded, time remaining.">
         <ph name="DOWNLOAD_RECEIVED">$1<ex>54/154 MB</ex></ph>, <ph name="TIME_LEFT">$2<ex>5s</ex></ph>
@@ -2278,8 +2288,8 @@ are declared in tools/grit/grit_rule.gni.
       <message name="IDS_DOWNLOAD_LINK_PAUSE" desc="In the download view, 'Pause' link text">
         Pause
       </message>
-      <message name="IDS_DOWNLOAD_SEARCH" desc="Placeholder text/label for the search input in the download page">
-        Search downloads
+      <message name="IDS_DOWNLOAD_HISTORY_SEARCH" desc="Placeholder text/label for the search input in the download history page">
+        Search download history
       </message>
       <message name="IDS_DOWNLOAD_NO_DOWNLOADS" desc="A message shown when the user has no downloads to show on chrome://downloads.">
         Files you download appear here
@@ -5796,6 +5806,15 @@ Keep your key file in a safe place. You will need it to create new versions of y
       <message name="IDS_PARENT_PERMISSION_PROMPT_PARENT_ACCOUNT_LABEL" desc="Text for the label shown above a single parent account email.">
         Parent account
       </message>
+      <message name="IDS_PARENT_PERMISSION_PROMPT_PARENT_ACCOUNT_VERIFY_LABEL" desc="Text for the label shown above the parent account email(s) asking them to authenticate as parents.">
+        Verify you’re a parent
+      </message>
+      <message name="IDS_PARENT_PROMPT_ENTER_PASSWORD_TO_ALLOW_EXTENSION_LABEL" desc="Text instructing the parent to authenticate in order to approve an individual extension">
+        To allow this extension, enter your password.
+      </message>
+      <message name="IDS_SKIP_PARENT_PERMISSION_EXTENSION_INFORMATION" desc="Text informing the parent about the option to skip parent approvals in Family Link">
+        To allow <ph name="CHILD_NAME">$1<ex>Junior</ex></ph> to install future extensions without your approval, open the Family Link app on your device and update <ph name="CHILD_NAME">$1<ex>Junior</ex></ph>’s Brave settings.
+      </message>
       <message name="IDS_PARENT_PERMISSION_PROMPT_ENTER_PASSWORD_LABEL" desc="Text for the label shown above the parent password entry field.">
         Enter password
       </message>
@@ -7721,7 +7740,7 @@ Keep your key file in a safe place. You will need it to create new versions of y
       <message name="IDS_NTP_WALLPAPER_SEARCH_RESULT_LABEL_WITH_DESCRIPTORS_B_AND_C" desc="Accessibility label for a wallpaper search result, with descriptors A, B, and C.">
         Generated image <ph name="INDEX">$1<ex>2</ex></ph> of <ph name="SUBJECT">$2</ph>, in <ph name="STYLE">$3</ph> style, with <ph name="MOOD">$4</ph> mood.
       </message>
-      <message name="IDS_NTP_WALLPAPER_SEARCH_SUBJECT_LABEL" desc="Label for the Create theme with AI dropdown for selecting subject of the image.">
+      <message name="IDS_NTP_WALLPAPER_SEARCH_SUBJECT_LABEL" desc="Label for the Create theme with AI dropdown for selecting subject of the image." meaning="The main subject (house, forest, etc.) of an image.">
         Subject
       </message>
       <message name="IDS_NTP_WALLPAPER_SEARCH_SUBJECT_DEFAULT_OPTION_LABEL" desc="Label for the option that a user can pick to unselect a previously selected subject. Also serves as a heading and label for the whole dropdown.">
@@ -8847,6 +8866,9 @@ Keep your key file in a safe place. You will need it to create new versions of y
       </message>
       <message name="IDS_LENS_SEARCH_UPLOAD_DIALOG_TITLE" desc="Title on dialog to upload an image to Google Lens.">
         Search any image with Google Lens
+      </message>
+      <message name="IDS_LENS_SEARCH_UPLOAD_DIALOG_TITLE_SHORT" desc="Short title on dialog to upload an image to Google Lens.">
+        Search any image with Lens
       </message>
       <message name="IDS_LENS_SEARCH_UPLOAD_DIALOG_DRAG_TITLE" desc="Message to user on drop zone where they can drag-and-drop an image to search.">
         Drag an image here or
