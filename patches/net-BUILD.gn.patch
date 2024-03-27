@@ -1,5 +1,5 @@
 diff --git a/net/BUILD.gn b/net/BUILD.gn
-index a0085c7fc72f6a0fe71eb6d22494ab09899cb56d..eb643f36d1c7c52489806e715c3ca6e1ed43816b 100644
+index 9696042aabaf0394e24285f2dd09b66b75cf8b32..6f1350dfd71256c61539e3079cf299e4ff1f667a 100644
 --- a/net/BUILD.gn
 +++ b/net/BUILD.gn
 @@ -1101,6 +1101,7 @@ component("net") {

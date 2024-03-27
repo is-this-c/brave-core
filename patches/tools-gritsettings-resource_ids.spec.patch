@@ -1,5 +1,5 @@
 diff --git a/tools/gritsettings/resource_ids.spec b/tools/gritsettings/resource_ids.spec
-index 3f1b6e141622fea719c38e7825d858e67bc06bf9..8d66d23381b3e0de2eaed98a7103011f186b4676 100644
+index 86498043bfb9d474b03cceb0c3bbca8f85df0ac4..79deaa3b8179282e3adb6e3912ba5ff98bf5e4f7 100644
 --- a/tools/gritsettings/resource_ids.spec
 +++ b/tools/gritsettings/resource_ids.spec
 @@ -38,6 +38,9 @@
@@ -12,7 +12,7 @@ index 3f1b6e141622fea719c38e7825d858e67bc06bf9..8d66d23381b3e0de2eaed98a7103011f
    "chrome/app/google_chrome_strings.grd": {
      "messages": [800],
    },
-@@ -293,7 +296,7 @@
+@@ -300,7 +303,7 @@
      "includes": [3220],
    },
    "<(SHARED_INTERMEDIATE_DIR)/chrome/browser/resources/history/resources.grd": {
@@ -21,7 +21,7 @@ index 3f1b6e141622fea719c38e7825d858e67bc06bf9..8d66d23381b3e0de2eaed98a7103011f
      "includes": [3240],
    },
    "<(SHARED_INTERMEDIATE_DIR)/chrome/browser/resources/identity_internals/resources.grd": {
-@@ -436,7 +439,7 @@
+@@ -443,7 +446,7 @@
      "includes": [3900],
    },
    "<(SHARED_INTERMEDIATE_DIR)/chrome/browser/resources/settings/resources.grd": {
@@ -39,7 +39,7 @@ index 3f1b6e141622fea719c38e7825d858e67bc06bf9..8d66d23381b3e0de2eaed98a7103011f
    },
    # END chrome/ WebUI resources section
  
-@@ -951,6 +954,9 @@
+@@ -954,6 +957,9 @@
    "components/components_chromium_strings.grd": {
      "messages": [7020],
    },
