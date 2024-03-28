@@ -214,6 +214,7 @@ class ConversationDriver {
 
   // TODO(nullhook): Abstract the data model
   std::string model_key_;
+  // TODO(nullhook): Change this to mojo::StructPtr
   std::vector<mojom::ConversationTurn> chat_history_;
   bool is_conversation_active_ = false;
 
