@@ -317,6 +317,7 @@ void AddBraveColorMixerForAllThemes(ui::ColorProvider* provider,
   // color by their color mixers.
   mixer[kColorToolbarButtonActivated] = {SkColorSetRGB(0x7C, 0x91, 0xFF)};
   mixer[kColorSidebarButtonPressed] = {kColorToolbarButtonActivated};
+  mixer[ui::kColorMenuBackground] = {kColorToolbar};
 }
 
 }  // namespace
