@@ -17,28 +17,23 @@ import getPageHandlerInstance from '../../api/page_handler'
 const MAX_INPUT_CHAR = 2000
 const CHAR_LIMIT_THRESHOLD = MAX_INPUT_CHAR * 0.80
 
-interface InputBoxProps {
-  inputText?: string
-}
-
-function InputBox (props: InputBoxProps) {
-  const [inputText, setInputText] = React.useState(props.inputText ?? '')
+function InputBox () {
   const context = React.useContext(DataContext)
 
-  const isCharLimitExceeded = inputText.length >= MAX_INPUT_CHAR
-  const isCharLimitApproaching = inputText.length >= CHAR_LIMIT_THRESHOLD
+  const isCharLimitExceeded = context.inputText.length >= MAX_INPUT_CHAR
+  const isCharLimitApproaching = context.inputText.length >= CHAR_LIMIT_THRESHOLD
 
   const onInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setInputText(e.target.value)
+    context.setInputText(e.target.value)
   }
 
   const submitInputTextToAPI = () => {
-    if (!inputText) return
+    if (!context.inputText) return
     if (isCharLimitExceeded) return
     if (context.shouldDisableUserInput) return
 
-    getPageHandlerInstance().pageHandler.submitHumanConversationEntry(inputText)
-    setInputText('')
+    getPageHandlerInstance().pageHandler.submitHumanConversationEntry(context.inputText)
+    context.setInputText('')
   }
 
   const handleSubmit = (e: CustomEvent<any>) => {
@@ -61,22 +56,17 @@ function InputBox (props: InputBoxProps) {
     }
   }
 
-  React.useEffect(() => {
-    if (!props.inputText) return
-    setInputText(props.inputText)
-  }, [props.inputText])
-
   return (
     <form className={styles.form}>
       <div
         className={(context.isMobile ? styles.growWrapMobile : styles.growWrap)}
-        data-replicated-value={inputText}
+        data-replicated-value={context.inputText}
       >
         <textarea
           placeholder={getLocale('placeholderLabel')}
           onChange={onInputChange}
           onKeyDown={onUserPressEnter}
-          value={inputText}
+          value={context.inputText}
           autoFocus
           rows={1}
         />
@@ -87,7 +77,7 @@ function InputBox (props: InputBoxProps) {
           [styles.counterTextVisible]: isCharLimitApproaching,
           [styles.counterTextError]: isCharLimitExceeded
         })}>
-          {`${inputText.length} / ${MAX_INPUT_CHAR}`}
+          {`${context.inputText.length} / ${MAX_INPUT_CHAR}`}
         </div>
       )}
       <div className={styles.actions}>
