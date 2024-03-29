@@ -14,6 +14,6 @@ static_library("webcompat_exceptions") {
   deps = [
     "//base",
     "//brave/components/brave_component_updater/browser",
-    "//extensions/common:common",
+    "//brave/extensions:common",
   ]
 }
